@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        class Subscription {
+            constructor(){
+                this.subscribeptions = new Set();
+                this.subscribe = (callback) => {
+                    this.subscribeptions.add(callback);
+                };
+
+                this.notifyAll = (newValue) => {
+                    if (!this.subscribeptions.size) return;
+                    Array.from(this.subscribeptions).forEach((cb) => {
+                        cb(newValue);
+                    });
+                };
+            }
+        }
+
+        let currentFrame = [];
+        const currentFrameManipulate = (frame, fun) => {
+            currentFrame.push(frame);
+            fun();
+            currentFrame.pop();
+        };
+
+        const registerDependency = function(observable){
+            const computedObservable = currentFrame[currentFrame.length - 1];
+            if (computedObservable) {
+                computedObservable.subscribeToDependency(observable);
+                computedObservable.addDependencyTracking(observable);
+            }
+        }
+
+        class Observable extends Subscription {
+            constructor(initialValue, name){
+                super();
+                this.name = name;
+                this.latestValue = initialValue;
+                this.read = function(){
+                    registerDependency(this);
+                    return this.latestValue;
+                };
+                this.write = function(newValue){
+                    if (this.latestValue === newValue) {
+                        return;
+                    }
+                    this.latestValue = newValue;
+                    if (this.subscribeptions.size) {
+                        currentFrameManipulate(undefined, () => {
+                            this.notifyAll(this.subscribeptions);
+                        });
+                    }
+                };
+            }
+        }
+
+        class ComputedObservable extends Subscription {
+            constructor(readFun, name){
+                super();
+                this.name = name;
+                this.dependencyTracking = new Set();
+                this.readFun = readFun;
+                this.latestValue = undefined;
+
+                this.subscribeToDependency = function(observable){
+                    if (this.subscribeptions.has(this.evaluate)) {
+                        return
+                    }
+                    observable.subscribe(this.evaluate);
+                };
+
+                this.addDependencyTracking = function(subscription){
+                    if (this.dependencyTracking.has(subscription)) {
+                        return;
+                    }
+                    this.dependencyTracking.add(subscription);
+                };
+
+                this.evaluate = () => {
+                    currentFrameManipulate(this, () => {
+                        const newValue = this.readFun();
+                        if (this.latestValue !== newValue) {
+                            this.latestValue = newValue;
+                            console.log(this.name, this.latestValue);
+                            this.notifyAll(newValue)
+                        }
+                    });
+                };
+
+                this.dispose = () => {
+                    if (this.dependencyTracking.size) {
+                        Array.from(this.dependencyTracking).forEach((observable) => {
+                            observable.subscribeptions.remove(this);
+                        })
+                    }
+                };
+
+                this.read = function(){
+                    registerDependency(this);
+                    return this.latestValue;
+                };
+
+                // 初始估值
+                this.evaluate();
+            }
+        }
+    </script>
+
+    <script>
+        const bindHandlers = {
+            text: function(node, valueAccessor){
+                const value = valueAccessor();
+                node.innerText = value.read();
+            },
+            value: function(node, valueAccessor){
+                const value = valueAccessor();
+                node.value = value.read();
+                if (!node.inited) {
+                    node.addEventListener('change', function(event){
+                        value.write(event.target.value);
+                    });
+                    node.inited = true;
+                }
+            },
+            array: function(node, valueAccessor){
+                const value = valueAccessor();
+                const arrayValue = value.read();
+                for (let i = 0; i < arrayValue.length; i++) {
+                    const clone = node.firstElementChild.cloneNode(true);
+                    node.appendChild(clone);
+                }
+                // 删除第一个元素
+                node.removeChild(node.firstElementChild)
+            }
+        };
+
+        function applyBindings(viewModel, rootNode){
+            // 深度优先遍历
+            tranverse(viewModel, rootNode)
+        }
+
+        function tranverse(viewModel, node){
+            if (node.nodeType !== 1) {
+                return;
+            }
+
+            applyBindingsToNodeInternal(viewModel, node);
+
+            const children = node.children;
+            if (!children || !children.length) return;
+            for (let i = 0; i < children.length; i++) {
+                tranverse(viewModel, children[i]);
+            }
+        }
+
+        function applyBindingsToNodeInternal(bindingContext, nodeVerified){
+            const bindingsString = nodeVerified.dataset.bind;
+            if (!bindingsString)
+                return;
+
+            const bindingsStringObj = JSON.parse(bindingsString);
+            let funBody = [];
+            for (const key in bindingsStringObj) {
+                funBody.push(`"${key}": function(){return ${bindingsStringObj[key]}}`)
+            }
+            funBody = funBody.join(',');
+            const template = `with($context){return { ${funBody} } }`;
+            const templateFun = new Function("$context", "$element", template);
+            const parsedBindings = templateFun(bindingContext, nodeVerified);
+
+            for (const key in parsedBindings) {
+                new ComputedObservable(function(){
+                    const handler = bindHandlers[key];
+                    handler && handler(nodeVerified, parsedBindings[key]);
+                })
+            }
+        }
+    </script>
+
+    <script>
+        window.onload = function(){
+
+            const _observable_1 = new Observable('ys', '_observable_1');
+            const _observable_2 = new Observable('sq', '_observable_2');
+
+            const _computeObservable_1 = new ComputedObservable(() => {
+                return _observable_1.read() + ' love ' + _observable_2.read();
+            }, '_computeObservable_1');
+            const _computeObservable_2 = new ComputedObservable(() => {
+                return _computeObservable_1.read() + ' forever';
+            }, '_computeObservable_2');
+            const _computeObservable_3 = new ComputedObservable(() => {
+                return _computeObservable_1.read() + ' ==== ' + _computeObservable_2.read();
+            }, '_computeObservable_2');
+
+            console.log('1', _computeObservable_3.read());
+            setTimeout(function(){
+                _observable_1.write('yusong');
+                console.log('2', _computeObservable_3.read());
+            }, 1000);
+
+            setTimeout(function(){
+                _observable_2.write('sunqing');
+                console.log('3', _computeObservable_3.read());
+            }, 2000);
+
+            // ----------------------------------------------------------------------------------------------------------------------------
+
+            const inputValue = new Observable('yusong-input');
+            const arrayObser = new Observable([1, 2, 3, 4]);
+            const displayName = new ComputedObservable(function(){
+                return inputValue.read();
+            });
+            const viewModel = {
+                displayName,
+                inputValue,
+                arrayObser
+            };
+            applyBindings(viewModel, document.body);
+        }
+    </script>
+</head>
+<body>
+<div>
+    <div data-bind='{"text": "displayName"}'></div>
+    <input data-bind='{"value": "inputValue"}'/>
+    <input data-bind='{"value": "inputValue"}'/>
+</div>
+<input data-bind='{"value": "inputValue"}'/>
+
+
+<div data-bind='{"array": "arrayObser"}'>
+    <div>11</div>
+</div>
+</body>
+</html>

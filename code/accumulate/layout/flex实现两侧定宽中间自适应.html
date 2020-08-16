@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<html>
+<head>
+    <title>弹性盒模型法</title>
+    <style type="text/css">
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        main {
+            display: flex;
+            flex: 1;
+        }
+
+        .middle {
+            flex: 1;
+            background-color: black;
+        }
+
+        .left,
+        .right {
+            flex-basis: 200px;
+            background-color: pink;
+        }
+
+        .left {
+            order: -1;
+        }
+
+    </style>
+</head>
+<body>
+
+<main>
+    <div class="middle">middle</div>
+    <aside class="left">left</aside>
+    <aside class="right">right</aside>
+</main>
+
+</body>
+</html>

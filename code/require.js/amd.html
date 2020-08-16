@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script>
+        /**
+         * 下面代码中仅实现了amd的核心功能，模块依赖的查找和加载
+         * 不包含循环依赖的检查，超时，多版本等功能
+         * @type {string}
+         */
+        const baseUrl = 'app/';
+
+        // 全局变量初始化
+        const registry = {};
+        const defined = {};
+
+        // 一个js文件加载执行完后，定义的模块（执行define方法，会将定义模块信息保存到这里，见define方法
+        let globalQueue = [];
+
+        let counter = 1;
+
+        function getCount(){
+            return counter++;
+        }
+
+        const requirejs = {
+            config: function(config){
+                // 模块信息的配置，如shim，path，fallback-url等
+            }
+        };
+
+        function getModule(name, dep){
+            let mod = registry[name];
+
+            if (!mod) {
+                mod = registry[name] = new Module(name, dep);
+            }
+
+            return mod;
+        }
+
+        function callGetModule(moduleInfo){
+            const name = moduleInfo[0];
+            if (!defined[name]) {
+                getModule(name).init(moduleInfo[1], moduleInfo[2]);
+            }
+        }
+
+        function define(name, deps, callback){
+            if (!callback) {
+                callback = deps;
+                deps = name;
+                name = undefined;
+            }
+
+            // 暂仅支持一个js文件调用一次define
+            globalQueue = [name, deps, callback];
+        }
+
+        // js资源加载并成功执行后的回调
+        function onScriptLoad(event){
+            if (!globalQueue.length) return;
+
+            // 暂一个js只支持一个define
+            const cloneQueue = globalQueue;
+            globalQueue = [];
+            const moduleName = event.target.getAttribute('module-id');
+
+            if (!cloneQueue[0]) {
+                cloneQueue[0] = moduleName;
+            }
+
+            callGetModule(cloneQueue);
+        }
+
+        // 创建script标签，加载js资源
+        function createNode(module){
+            const node = document.createElement('script');
+            node.type = 'text/javascript';
+            node.async = true;
+            node.setAttribute('module-id', module.name);
+            node.addEventListener('load', onScriptLoad.bind(module), false);
+            node.src = module.url + '.js';
+            document.head.appendChild(node);
+            return node;
+        }
+
+        // 核心类
+        class Module {
+            constructor(name, deps, callback){
+                this.name = name;
+                this.url = baseUrl + name;
+                this.factory = callback;
+                this.deps = deps;
+                this.depCount = 0;
+                this.depExports = [];
+                this.subscribeptions = new Set();
+
+                // 支持观察者模式的功能
+                this.subscribe = (callback) => {
+                    if (defined[this.name]) {
+                        callback(this.exports);
+                        return;
+                    }
+                    this.subscribeptions.add(callback);
+                };
+
+                this.notifyAll = (newValue) => {
+                    if (!this.subscribeptions.size) return;
+                    Array.from(this.subscribeptions).forEach((cb) => {
+                        cb(newValue);
+                    });
+                    this.subscribeptions.clear();
+                };
+
+                // inited 状态用来表示模块是否初始化过
+                this.init = (deps, factory, enabled) => {
+                    if (this.inited) return;
+                    this.inited = true;
+                    this.deps = deps;
+                    this.factory = factory;
+
+                    if (enabled || this.enabled) {
+                        this.enable();
+                    } else {
+                        this.check();
+                    }
+                };
+
+                // 加载当前模块的依赖模块，核心是向依赖模块添加订阅，当依赖模块完成后
+                // 触发回调，当前模块会检查自己是否可以完成模块的定义
+                this.enable = () => {
+                    this.enabled = true;
+                    this.enabling = true;
+                    for (let i = 0; this.deps && i < this.deps.length; i++) {
+                        this.depCount++;
+                        const mod = getModule(this.deps[i]);
+                        mod.subscribe((depExports) => {
+                            this.defineDep(i, depExports);
+                            this.check();
+                        });
+                        if (!mod.enabled) {
+                            mod.enable();
+                        }
+                    }
+                    this.enabling = false;
+                    this.check();
+                };
+
+                this.defineDep = (i, depExports) => {
+                    this.depCount--;
+                    this.depExports[i] = depExports;
+                };
+
+                // 检查模块是否准备好完成模块的定义(即所有的依赖也都准备好了
+                this.check = () => {
+                    if (!this.enabled || this.enabling) {
+                        return;
+                    }
+
+                    if (!this.inited) {
+                        this.fetch();
+                    } else if (!this.defining) {
+                        this.defining = true;
+                        if (this.depCount == 0 && !this.defined) {
+                            if (typeof this.factory == 'function') {
+                                this.exports = this.factory.apply(this, this.depExports);
+                            } else {
+                                this.exports = this.factory;
+                            }
+                            this.defined = true;
+                            defined[this.name] = this.exports;
+                            this.notifyAll(this.exports);
+                        }
+                        this.defining = false;
+                    }
+                };
+
+                // 请求js资源
+                this.fetch = () => {
+                    if (this.fetchd) return;
+                    this.fetchd = true;
+                    createNode(this);
+                }
+            }
+        }
+
+        // 入口api
+        function require(deps, callback){
+            getModule('_@' + getCount(), deps).init(deps, callback, true);
+        }
+
+    </script>
+    <script>
+        // 测试
+        require(['main.test'], function(mainTest){
+            console.log(mainTest);
+        });
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>
