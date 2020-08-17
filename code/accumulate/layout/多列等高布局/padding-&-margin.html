@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--https://juejin.im/post/6844903615182667789-->
+    <style>
+        .wrapper {
+            overflow: hidden;
+        }
+
+        /*实现一*/
+        .wrapper > .item {
+            float: left;
+            margin: 0 10px -9999px 0;
+            padding-bottom: 9999px;
+            background: #4577dc;
+            width: 200px;
+            color: #fff;
+        }
+
+        /*!*实现二*!*/
+        /*.wrapper > .item {*/
+        /*    display: inline-block;*/
+        /*    margin: 0 10px -9999px 0;*/
+        /*    padding-bottom: 9999px;*/
+        /*    background: #4577dc;*/
+        /*    width: 200px;*/
+        /*    color: #fff;*/
+        /*    vertical-align: top; !*inline-block的基线是子元素中最后一行内联元素的极限，需要改变基线对齐*!*/
+        /*}*/
+
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="item">
+        一家将客户利益置于首位的经纪商，
+        为客户提供专业的交易工具一家将客户利益置于首位的经纪商，
+        为客户提供专业的交易工具一家将客户利益置于首位的经纪商，
+        为客户提供专业的交易工具一家将客户利益置于首位的经纪商，为客户提供专业的交易工具
+    </div>
+    <div class="item">
+        一家将客户利益置于首位的经纪商，为客户提供专业的交易工具
+        一家将客户利益置于首位的经纪商，为客户提供专业的交易工具
+    </div>
+    <div class="item">
+        一家将客户利益置于首位的经纪商，为客户提供专业的交易工具
+    </div>
+</div>
+</body>
+</html>

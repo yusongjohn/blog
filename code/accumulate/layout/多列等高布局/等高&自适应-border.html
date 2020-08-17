@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+
+
+    .box {
+        border-left: 150px solid #333;
+        background-color: #f0f3f9;
+    }
+
+    .box:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .box > nav {
+        width: 150px;
+        float: left;
+        margin-left: -150px; /*关键*/
+    }
+
+    .box > section {
+        overflow: hidden;
+    }
+
+    .nav {
+        line-height: 40px;
+        color: #fff;
+    }
+
+    .nav + .nav {
+        line-height: 39px;
+        border-top: 1px solid #555;
+    }
+
+    .module {
+        line-height: 40px;
+    }
+</style>
+<div class="box">
+    <nav>
+        <h3 class="nav">导航1</h3>
+        <h3 class="nav">导航2</h3>
+        <h3 class="nav">导航3</h3></nav>
+    <section>
+        <div class="module">模块1</div>
+    </section>
+</div>
+</body>
+</html>
