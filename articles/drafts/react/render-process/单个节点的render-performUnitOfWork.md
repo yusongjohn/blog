@@ -51,13 +51,13 @@ function performUnitOfWork(workInProgress){
 # beginWork
 注意，参数是fiber的替换版本，之前说过，调和的工作都是在这个版本的fiber对象上去处理的，之所以不再current上处理是为了避免丢失更新前的数据（current保留了页面中展示dom的数据），后面的调和也需要alternate版本的fiber对象和current版本的fiebr对象进行对比，以得出差异，好在commit阶段去更新
 ## 主要流程
-1. current$$1不为空，则说明当前处于更新阶段，那么困难会存在部分节点不需要更新的情况
+1. current$$1不为空，则说明当前处于更新阶段，那么可能会存在部分节点不需要更新的情况
     - 如果props发生了变化 又或者 context 发生了变化，设置didReceiveUpdate=true 【TODO 作用】
         - didReceiveUpdate 从该变量名可以看出这个变量用于表示来自父组件的变化导致的更新
     - 如果当前props没有变化 并且 context 也没有变化 并且 当前节点的expirationTime小于renderExpirationTime（低优先级）则跳过该节点的更新；在退出该节点的更新之前还需要有些数据的入栈操作，比如context的入栈（为什么这里要去入栈？可以参考context章节），这些入栈对应着completeUnitOfWork -> completeWork 的出栈操作；下面举两个说明进入这里的else if的案例
         - context的新式用法中，如果某个Provider的context发生了变化，则会propagateContextChange去找到订阅了该context的节点，只有订阅了context的节点才会去更新，其他节点没有更新就是在这里 bailoutOnAlreadyFinishedWork 的，这个案例在context的新式用法章节有提到
         - 另一个例子，当某个中间组件setState后，由于父组件没有更新任务，那么父组件也会进入这里的else if调用 bailoutOnAlreadyFinishedWork
-    - 不满足a,b，则说明该节点有更新，但是节点更新仅自组件内部的就setState导致组件的更新
+    - 不满足a,b，则说明该节点有更新，但是节点更新是仅来自组件内部的即setState导致组件的更新
 2. 当准备更新该节点时，设置该节点的expirationTime为NoWork
 3. 当前节点有更新时，则会根据节点类型找到对应的方法实现节点的更新（调和）
     - 不同类型节点的调和工作在另外的文章中介绍
@@ -102,7 +102,7 @@ function beginWork(current$$1, workInProgress, renderExpirationTime){
 参考：https://zhuanlan.zhihu.com/p/121717560
 
 ## 主要流程
-根据当前节点执行过程中是否出现异常（通过添加Incomplete标识判断是否有异常）分别走不通的if-else分支
+根据当前节点执行过程中是否出现异常（通过添加Incomplete标识判断是否有异常）分别走不同的if-else分支
 
 1. 如果当前节点performUnitOfWork过程中没有出现异常 也就是：（workInProgress.effectTag & Incomplete) === NoEffect
     - 针对不同的fiber类型，完成剩余的工作： completeWork【TODO】
@@ -240,10 +240,10 @@ beginWork -> [ updateHostComponent -> ] pushHostContext
         ```
 
         - 调用 finalizeInitialChildren
-            - setInitialProperties【TODO】（事件注册，样式等的设置就是发生在这里
+            - setInitialProperties（事件注册，样式等的设置就是发生在这里
             - shouldAutoFocusHostComponent 如果是input这里可以focus的元素，需要判断下是否要focus【TODO】commit阶段focus？
         - 设置fiber的stateNode属性，通过该属性关联dom元素
-        - markRef$1【TODO】commit阶段去设置？
+        - markRef$1
 
 ## HostText
 1. 挂载阶段：创建文本节点，workInProgress.stateNode = createTextInstance
