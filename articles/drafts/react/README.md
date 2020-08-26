@@ -28,3 +28,8 @@
 - [react createPortal](其他/3.createPortal.md)
 - [react lazy & suspense](其他/4.lazy-&-suspense.md)
 - [react error-boundary](其他/5.error-boundary.md)
+
+
+参考
+- [Alvin's notes](https://alvin.run/react/code/home.html)
+- [React 源码解析](https://react.jokcy.me/)

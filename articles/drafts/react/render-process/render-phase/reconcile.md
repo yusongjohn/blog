@@ -25,7 +25,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-除了调和 ，这部分另外一个最重要的功能是创建fiber，除了根节点的fiber是在初始的时候创建的意外，整颗树的所有子孙节点的fiber对象都是在这里创建的
+除了调和 ，这部分另外一个最重要的功能是创建fiber，除了根节点的fiber是在初始的时候创建的以外，整颗树的所有子孙节点的fiber对象都是在这里创建的
 ```javascript
 createFiberFromTypeAndProps
 createFiberFromSuspense
@@ -90,7 +90,7 @@ return placeSingleChild(reconcileSingleElement(returnFiber, currentFirstChild, n
     - 不存在替换版本，说明该节点是首次出现并需要挂载。比如在reconcileSingleElement没有找到可以复用的节点，则会完全重新创建一个fiber，这个fiber就需要设置Placement标识以便在commit提交，如果该新创建的节点是HostComponent/HostText会在completeWork中去创建真实dom，然后在commit阶段插入到文档中
     - 那如果存在替换版本，即针对该节点要做的更新，而不是替换操作，在哪设置标识并被处理呢？如果是HostComponent/HostText会在completeWork中去判断节点是否需要更新(属性是否发生变化)，如果需要则会设置Update标志
 
-3. 如果newChild是对象，并且newChild.$$typeof 是REACT_PORTAL_TYPE 【TODO】穿梭门案例
+3. 如果newChild是对象，并且newChild.$$typeof 是REACT_PORTAL_TYPE 【TODO】
 ```javascript
 return placeSingleChild(reconcileSinglePortal(returnFiber, currentFirstChild, newChild, expirationTime));
 ```
@@ -242,7 +242,7 @@ function reconcileChildrenArray(returnFiber, currentFirstChild, newChildren, exp
   // 第一次遍历，oldFiber使用sibling指针向后遍历，而newChildren是一个元素类型ReactElement的数组
   for (; oldFiber !== null && newIdx < newChildren.length; newIdx++) {
     // 见附录中的有趣案例，即老数组中有一个元素生成了一个空的对象，即没有生成真实的dom，也就没有一个fibre与之对应
-    // 比如案例中的元素D的索引4（: oldFiber.index），但是世界上按照fiber.sibling的顺序去遍历的话，对应的索引却是3（: newIndx)
+    // 比如案例中的元素D的索引4（: oldFiber.index），但是实际上上按照fiber.sibling的顺序去遍历的话，对应的索引却是3（: newIndx)
     // 通常情况下我们的nextOldFiber就是oldFiber.sibling，但是由于现在中间丢失了一个元素，现在的oldFiber就是nextOldFiber
     //（如当遍历到newIndx=3时，元素D就是nextOldFiber, 而不是元素D的sibling)；
     if (oldFiber.index > newIdx) {
@@ -283,7 +283,9 @@ function reconcileChildrenArray(returnFiber, currentFirstChild, newChildren, exp
     }
     
     // 主要目的是添加Placement标识到fiber.effectTag
-    // 移动和插入都需要设置该标志，保持不动(元素不做位置上的表动)则更新下lastPlacedIndex即可
+    // 移动和插入都需要设置该标志，保持'不动'则更新下lastPlacedIndex即可
+    // A B C => A C (A & C 均属于保持不动
+
     // lastPlacedIndex 表示保持不动的最右侧元素的索引
     lastPlacedIndex = placeChild(newFiber, lastPlacedIndex, newIdx);
     if (previousNewFiber === null) {
