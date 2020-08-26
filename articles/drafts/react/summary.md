@@ -1,0 +1,28 @@
+1. 渲染流程
+- ReactDom.render -> 创建root_fiber & 估算expirationTime（同步
+- scheduleRootUpdate: 创建更新对象{element}并添加到fiber.updateQueue 
+- scheduleWork: scheduleWorkToRoot & requestWork(addRootToSchedule & performSyncWork -> performWork)
+- while(){performWorkOnRoot & findHighestPriorityRoot}
+- performWorkOnRoot
+    - renderRoot -> workLoop -> performUnitOfWork
+        - beginWork -> updateXxxx ( -> reconcile)
+            - updateContextProvider:pushProvider & 设置context._currentValue & propagateContextChange
+            - updateClassComponent: 类组件的创建更新 & readContext(添加context依赖)
+            - updateContextConsumer: readContext & render(value) [context.provider的孩子是个函数
+            - mountIndeterminateComponent & updateFunctionComponent -> renderWithHooks
+        - completeUnitOfWork 
+            - 副作用链表
+            - completeWork
+                - popProvider/Context等 
+                - HostComponet: dom节点创建 & differProperties & setInitialProperties(:事件监听)
+                - Suspense组件？
+    - commitRoot -> commitRoot
+        - commitBeforeMutationLifeCycles: getSnapshotBeforeUpdate
+        - commitAllHostEffects
+            - Update: commitWork -> <span style='background:pink'>commitHookEffectList:unmout（执行useLayoutEffect的destroy</span>
+            - <span style='background:gray'>commitDetachRef</span>
+        - commitAllLifeCycles
+            - commitLifeCycles -> <span style='background:pink'>commitHookEffectList:mount（执行useLayoutEffect的create</span>
+            - <span style='background:gray'>commitAttachRef</span>      
+        - <span style='background:purple'>生成异步任务执行useEffect</span>  -> commitPassiveEffects -> commitPassiveHookEffects(destroy & create)
+
