@@ -149,6 +149,7 @@ completeLoad: function (moduleName) {
 
 # checkLoaded：检查模块加载异常
 模块异常的情况：循环依赖，加载超时，脚本执行报错等情况
+
 ## 主要流程
 1. 遍历 enabledRegistry ，
     - 如果是require(entry_module)时生成的启动模块会放进 reqCalls 中
@@ -168,8 +169,10 @@ each(reqCalls, function (mod) {
 
 ## breakCycle：循环依赖检查（如何判断一棵树是否存在循环？
 [示例代码](../../../../code/require.js/cycle-demo/index.html)
+
 ### 案例
 main模块依赖A模块，A模块依赖B模块，B又依赖A模块
+
 ![avatar](../../assets/images/require/2020/require-1.png)
  
 breakCycle中发现B依赖A，直接假定A完成了定义，解决B不因为依赖A而挂着
@@ -178,7 +181,9 @@ breakCycle中发现B依赖A，直接假定A完成了定义，解决B不因为依
 - traced[id]用来表示节点是否被跟踪过，processed[id]表示该节点是否遍历完成；
 - 思想：（递归）深度优先遍历树，如果发现子孙节点依赖父节点的情况，则说明存在循环依赖；
 - 代码的主要流程：当前遍历的节点X，深度优先遍历该节点，判断是否存在孩子节点指向该节点；（以当前节点为中心）
+
 ![avatar](../../assets/images/require/2020/require-2.png)
+
 ```javascript
 function breakCycle(mod, traced, processed) {
     var id = mod.map.id;
@@ -205,11 +210,12 @@ function breakCycle(mod, traced, processed) {
 
 # 以main模块加载为例介绍加载流程
 [demo示例](../../../../code/require.js/main-demo/index.html)
+
 主入口方法req/requirejs，还具备生成上下文和配置功能。主要根据是根据参数类型进行判断。我们这里只介绍模块的加载。
 
 看下初始的配置信息，信息的获取是通过找到具备data-main属性的script标签进行解析得到的，script标签格式如下。
 ```html
-<script src="../../../../code/require.js/lib/require.js" data-main="main"></script>
+<script src="../lib/require.js" data-main="main"></script>
 ```
 
 本示例中的初始配置信息如下：
@@ -255,6 +261,7 @@ function newContext(contextName) {
 ```
 
 启动模块的map信息如下
+
 ![avatar](../../assets/images/require/2020/require-4.png)
 
 接着往下走，来到_@r3.init() -> _@r3.enable() 启动依赖模块的加载，注意 this.depCount = 1（依赖main.js） => 这里启动依赖模块main.js的加载
@@ -266,5 +273,5 @@ main.js加载执行完后 onScriptLoad -> completeLoad -> callGetModule -> main_
 当main_moudle完成定义后触发自身的defined回调 -> _@r3完成了定义
 
 ## 小结
-调用req方法主动发起启动模块的状态流转：inited -> enabled -> 
-作为被依赖的模块被启动模块发起被动发起普通模块的状态流转：enabled -> fetched -> inited ->
+- 调用req方法主动发起启动模块的状态流转：inited -> enabled -> 
+- 作为被依赖的模块被启动模块发起被动发起普通模块的状态流转：enabled -> fetched -> inited ->

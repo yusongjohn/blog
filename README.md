@@ -3,7 +3,7 @@
 - [requirejs-核心代码实现](articles/condensed/requirejs.md)
 - [knockout-核心代码实现](articles/condensed/knockout.md)
 
-- [requirejs-草稿](articles/drafts/framework/require.md) 
+- [requirejs-草稿](articles/drafts/framework/requirejs/require.md) 
 - [knockout-草稿](articles/drafts/framework/knockout/README.md)
 - [Durandal-草稿](articles/drafts/framework/durandal/README.md)
 - [react-草稿](articles/drafts/framework/react/README.md)     
