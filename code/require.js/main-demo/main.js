@@ -1,7 +1,7 @@
 requirejs.config({
-    paths: {
-    }
+    paths: {}
 });
 
-define([ ], function ( ) {
+define(['./A', './B'], function(moduleA, moudleB){
+    return moduleA + moudleB;
 });

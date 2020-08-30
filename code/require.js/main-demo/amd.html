@@ -8,7 +8,9 @@
          * 不包含循环依赖的检查，超时，多版本等功能
          * @type {string}
          */
-        const baseUrl = 'app/';
+
+        // 应该是配置或者解析的，这里简化设置爱为默认值
+        const baseUrl = '';
 
         // 全局变量初始化
         const registry = {};
@@ -17,8 +19,8 @@
         // 一个js文件加载执行完后，定义的模块（执行define方法，会将定义模块信息保存到这里，见define方法
         let globalQueue = [];
 
+        // 仅用来区分内部模块命名
         let counter = 1;
-
         function getCount(){
             return counter++;
         }
@@ -29,6 +31,7 @@
             }
         };
 
+        // 每个模块名称都会对应一个模块实例
         function getModule(name, dep){
             let mod = registry[name];
 
@@ -46,6 +49,7 @@
             }
         }
 
+        // 对外暴露的define方法，amd规范指定的定义模块的方法
         function define(name, deps, callback){
             if (!callback) {
                 callback = deps;
@@ -53,11 +57,13 @@
                 name = undefined;
             }
 
+            // 模块脚本中调用define方法时，将模块的信息保存下来，当模块脚本执行完成后
+            // 会调用onScriptLoad回调取出这里保存的模块信息
             // 暂仅支持一个js文件调用一次define
             globalQueue = [name, deps, callback];
         }
 
-        // js资源加载并成功执行后的回调
+        // script标签onload事件(script.src执行的脚本成功加载并且执行完成后，进入这里
         function onScriptLoad(event){
             if (!globalQueue.length) return;
 
@@ -88,7 +94,9 @@
         // 核心类
         class Module {
             constructor(name, deps, callback){
+                // 模块名称
                 this.name = name;
+                // 模块资源url
                 this.url = baseUrl + name;
                 this.factory = callback;
                 this.deps = deps;
@@ -98,10 +106,13 @@
 
                 // 支持观察者模式的功能
                 this.subscribe = (callback) => {
+                    // 如果当前模块已经定义了，直接执行回调
                     if (defined[this.name]) {
                         callback(this.exports);
                         return;
                     }
+                    // 如果当前模块还未完成定义，则先将回调保存起来，等待当前模块
+                    // 完成定义后，再执行回调
                     this.subscribeptions.add(callback);
                 };
 
@@ -192,9 +203,9 @@
 
     </script>
     <script>
-        // 测试
-        require(['main.test'], function(mainTest){
-            console.log(mainTest);
+        // require相当于定于了一个内部模块
+        require(['main'], function(mainTest){
+            alert(mainTest);
         });
     </script>
 </head>
