@@ -389,7 +389,7 @@ cfg的值见2.1.5
 //Set up with config info.
 req(cfg);
 ```
-![avatar](../assets/images/require/cfg.png)
+![avatar](../../assets/images/require/cfg.png)
 
 ## 2.2 模块的加载过程
 >[案例代码](https://github.com/yusongjohn/durandal-source)，启动文件：test.html
@@ -477,7 +477,7 @@ function intakeDefines() {
     });
     ```
     - 如果屏蔽localRequire中的两句 intakeDefines() ，执行结果如下（有报错，但是require(['a1'])仍然顺利加载完成）
-        ![avatar](../assets/images/require/intake_defines_not.png)
+        ![avatar](../../assets/images/require/intake_defines_not.png)
         - 之所以报错是因为首先尝试将'a1'作为js文件去加载，因此控制台有加载a1.js文件404的报错
             >require(['a1'])走context.nextTick回调中，会生成匿名模块，然后执行到该匿名模块的enable（Module.prototype.enable），然后加载其依赖即'a1'，... ，会尝试加载a.js文件
         - 之所以仍然能够顺利加载完成是因为在nextTickTest.js文件执行完成以后，走completeLoad回调，该方法中有去加载完成模块'a1'的定义，因此并不影响require(['a1'])的加载
@@ -496,7 +496,7 @@ context.nextTick(function () {
     requireMod = getModule(makeModuleMap(null, relMap));
 }
 ```
-![avatar](../assets/images/require/anoni_module_main.test.png)
+![avatar](../../assets/images/require/anoni_module_main.test.png)
 
 - 开始进行内部模块的定义
 ```
@@ -515,7 +515,7 @@ context.nextTick(function () {
 > 跳过 Module.prototype.init 来到 Module.prototype.enable，enable方法的主要作用是加载其依赖模块，并添加其依赖模块的defined回调（通知该依赖模块完成了定义）
 
 1. 依赖模块处理入口：Module.prototype.enable
-![avatar](../assets/images/require/ano_module_deps.png)
+![avatar](../../assets/images/require/ano_module_deps.png)
 ```javascript
 enable: function () { // 递归 context.enable -> Module.prototype.enable
     enabledRegistry[this.map.id] = this;
@@ -546,19 +546,19 @@ enable: function () { // 递归 context.enable -> Module.prototype.enable
     
 2. 依赖模块'main.test'的定义完成 到 内部模块的定义完成
 - makeModuleMap
-![avatar](../assets/images/require/main.test_map.png)
+![avatar](../../assets/images/require/main.test_map.png)
 
 - 依赖模块'main.test' 的加载流程
-    ![avatar](../assets/images/require/main.test_module.png)
+    ![avatar](../../assets/images/require/main.test_module.png)
     - 调用栈：enable -> check -> fetch（构造script标签加载main.test.js），当main.test.js文件加载完成后会立即执行main.test.js文件中的代码<br/>
     - 执行main.test.js中的: requirejs.config <br/>
     - 执行main.test.js中的: define -> 添加到模块基本信息到 globalDefQueue
 
 - 执行完js文件中的代码后来到completeLoad回调
- ![avatar](../assets/images/require/main.test_success.png)
+ ![avatar](../../assets/images/require/main.test_success.png)
     - completeLoad的参数moduleName如何得来的？
     参数moduleName其实是从其sctipt标签上获取的，fetch()在构造script标签时就添加了一个属性[data-requiremodule]
-    ![avatar](../assets/images/require/module_name_script.png)
+    ![avatar](../../assets/images/require/module_name_script.png)
 
 - 启动main.test模块的定义
     - 调用栈:completeLoad -> callGetModule -> Module.prototype.init (该模块已经加载完成因此调用init)
@@ -566,7 +566,7 @@ enable: function () { // 递归 context.enable -> Module.prototype.enable
     
 - 内部模块完成定义    
     上面说到main.test完成定义后会触发其defined回调，在defined回调中的this就是内部模块(_@r3)，this.check()则会检查该模块是否可以结束定义（通过this.depCount判断，见this.check方法）
-    ![avatar](../assets/images/require/anoni_on_defined.png) 
+    ![avatar](../../assets/images/require/anoni_on_defined.png) 
 
 - 至此 内部模块"_@r3" 完成定义，也表示这主动加载过程的结束
 
@@ -621,10 +621,10 @@ enable: function () { // 递归 context.enable -> Module.prototype.enable
     ```
     
     makeModuleMap -> normalize 转化路径 './..test.json' => '../test.json' <br/>
-    ![avatar](../assets/images/require/test_json_normalize.png)
+    ![avatar](../../assets/images/require/test_json_normalize.png)
     
     makeModuleMap的结果<br/>
-    ![avatar](../assets/images/require/test_json_make_module_map.png) 
+    ![avatar](../../assets/images/require/test_json_make_module_map.png) 
 
 - 1.2 监听模块 "text!../test.json_unnormalized2" 的defined事件
 > 除了监听事件以外，如果该模块尚未完成定义的话，on还会调用getModule进行登记
@@ -681,7 +681,7 @@ function getModule(depMap) {
 2 开始 "text!../test.json_unnormalized2" 模块的定义
 > 跳过中间步骤（enable -> check）直接来到 fetch() 
 
-![avatar](../assets/images/require/test.json_fetch.png)  
+![avatar](../../assets/images/require/test.json_fetch.png)  
 - 2.1 callPlugin
 
 ```javascript
@@ -760,18 +760,18 @@ function (plugin) {
 - 2.2 下面说下 "text!../test.json_unnormalized2" 模块的加载流程<br/>
 
 pluginMap，this
-![avatar](../assets/images/require/text_on_defiend.png)
+![avatar](../../assets/images/require/text_on_defiend.png)
 
 - 2.2.1 pluginMap 监听defined事件（即text.js完成定义后触发这里的回调） 
     - text.js加载完成后进入defined回调：plugin
-    ![avatar](../assets/images/require/text_obj.png) 
+    ![avatar](../../assets/images/require/text_obj.png) 
 
     >回调有两种情况
     - 2.2.1.1 unnormalized 情况 走if(this.map.unnormalized)语句块
         >this.map.id = "text!../test.json_unnormalized2"
         
         normalizedMap："text!../test.json" （normalize，因此下一次回调走 2.2.1.2）
-        ![avatar](../assets/images/require/text_json_module_map.png)
+        ![avatar](../../assets/images/require/text_json_module_map.png)
          
         - normalizedMap 监听defined事件 (即 "text!../test.json" 加载完成后 走这里的回调) 
         ```javascript
@@ -849,7 +849,7 @@ function makeModuleMap(name, parentModuleMap, isNormalized, applyMap) {
              
 5 总结：
 - 控制台日志看该模块的加载流程
-    ![avatar](../assets/images/require/console_look_text_test.json.png)    
+    ![avatar](../../assets/images/require/console_look_text_test.json.png)    
     - 1. 首先"text!../test.json_unnormalized2"模块有两个依赖：text ，text/..test.json 两个模块
     - 2. normalize后的模块 "text/..test.json" 会去 通过text.js 加载test.json文件，然后"text/..test.json"该模块完成定义
     - 3. 当 "text/..test.json" 完成定义后 就会通知 "text!../test.json_unnormalized2" 去完成定义
@@ -1168,7 +1168,7 @@ define(['../lib/cycleA'], function (cycleA) {
 ```
 - 2. 执行结果
 看到main.test还是成功执行了
-![avatar](../assets/images/require/cycle_dep_result.png)
+![avatar](../../assets/images/require/cycle_dep_result.png)
 
 - 3. 循环依赖是如何处理的
     - checkLoaded:在这部分的作用
@@ -1217,7 +1217,7 @@ define(['../lib/cycleA'], function (cycleA) {
         1. 首先将父模块traced标识为true，然后再递归遍历其依赖模块，当处理依赖模块的依赖模块时遇到当前链（processed:false）中的父模块traced标识为true，说明存在循环依赖
         2. processed为false用于控制在当前链中查找
     3. 模块链示意图
-    ![avatar](../assets/images/require/cycle_alog.png)
+    ![avatar](../../assets/images/require/cycle_alog.png)
     > 为了形象的表达模块之间的数据结构上的关系，上面使用了模块链这样的说法来表达，其实用是多叉树表达更为严谨些
     
     ```javascript
@@ -1258,7 +1258,7 @@ define(['../lib/cycleA'], function (cycleA) {
 
 2. nameToUrl：把模块名称转为文件路径
 - 核心代码
-    ![avatar](../assets/images/require/durandal_indexttest_name_to_url.png)
+    ![avatar](../../assets/images/require/durandal_indexttest_name_to_url.png)
     
 - 思想：以模块名称为 'a/b/c/d'为例
     1. abcd在config.paths中是否有匹配 => matchRes
@@ -1380,12 +1380,12 @@ define('a1', [], function () {
 }) ;
 ```
 - 执行结果
-![avatar](../assets/images/require/nextTick_test.png)
+![avatar](../../assets/images/require/nextTick_test.png)
 
 1. 报错的原因
     因为执行require语句的时候不知道还有一个模块叫'a1'，默认情况下则会请求将模块作为js文件处理，因此会去请求a1.js，为什么报错在后呢？因为通过script标签请求文件是异步的过程<br/>
-![avatar](../assets/images/require/nexttick_running.png)
-![avatar](../assets/images/require/a1js_script.png)
+![avatar](../../assets/images/require/nexttick_running.png)
+![avatar](../../assets/images/require/a1js_script.png)
 
 2. 执行成功的原因
     1. nextTickTest.js执行过程中调用了define('a1')
@@ -1393,7 +1393,7 @@ define('a1', [], function () {
     3. 当该模块完成定义后，其会触发一个 [defined]事件 ，这个事件的监听者就是依赖 a1 的模块，
     4. 在这里就是 require(['a1']) ，因此 require(['a1'],fn) 的回调也会成功执行
     5. 监听依赖项的defined事件(Module.prototype.check)<br/>
-    ![avatar](../assets/images/require/defined_on.png)
+    ![avatar](../../assets/images/require/defined_on.png)
 
 3. 如果异步处理，则会先执行后面的同步代码，那么require(['a1'])也就不会尝试加载a1.js文件了；
 >我认为，这里应该是个优化的过程，并不是必须的。比如 nextTickTest.js 中的两句代码颠倒下顺序，也是可以顺利执行的；建议看requirejs源码时，把这里改为同步
@@ -1478,4 +1478,4 @@ requirejs.onError = function (error) {
 
 # 4 总结
 一个流程图
-![avatar](../assets/images/require/require.js流程图.png)
+![avatar](../../assets/images/require/require.js流程图.png)
