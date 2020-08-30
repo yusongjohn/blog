@@ -6,7 +6,7 @@
 
 ## 状态介绍
 - inited：启动模块在自创建module实例时候就已经设置该属性为true，依赖模块只有等到所在脚本加载并执行完成后调用callGetModule才会设置属性为true
-该属性设置为true后，表明不需要去请求脚本资源了
+该属性设置为true后，表明该模块已经开始进行定义了
 - enabled
 - fetched：启动创建脚本并添加到doc中进行脚本的加载
 - defined
@@ -26,7 +26,7 @@ init: function (depMaps, factory, errback, options) {
 ```
 
 ### enable
-主要流程：加载当前模块的依赖模块，并且对其依赖模块上添加defined事件，当其依赖模块完成定义后会触发defined事件，defined的回调函数中进行依赖保存，并调用this.check检查当前模块的状态是否可以完成定义
+主要流程：加载当前模块的依赖模块，并且在其依赖模块上添加defined事件，当其依赖模块完成定义后会触发defined事件，defined的回调函数中进行依赖保存，并调用this.check检查当前模块的状态是否可以完成定义
 ```javascript
 enable: function () {
     // ...
@@ -103,7 +103,7 @@ fetch: function () {
     var map = this.map;
 
    // 省略shim的情况
-   return map.prefix ? this.callPlugin() : this.load();
+   return map.prefix ? this.callPlugin() : this.load();// this.load 构造script标签加载资源
 },
 ```
 
@@ -219,6 +219,7 @@ function breakCycle(mod, traced, processed) {
 ```
 
 本示例中的初始配置信息如下：
+
 ![avatar](../../assets/images/require/2020/require-3.png)
 
 在requirejs的最后一行，会根据这个初始配置信息去加载main模块，由于这是个配置，在主入口中会调用context.configure(config);进行配置，context.configure中判断当前配置信息中如果存在deps则会加载模块
@@ -264,7 +265,7 @@ function newContext(contextName) {
 
 ![avatar](../../assets/images/require/2020/require-4.png)
 
-接着往下走，来到_@r3.init() -> _@r3.enable() 启动依赖模块的加载，注意 this.depCount = 1（依赖main.js） => 这里启动依赖模块main.js的加载
+接着往下走，来到`_@r3.init()` -> `_@r3.enable()` 启动依赖模块的加载，注意 this.depCount = 1（依赖main.js） => 这里启动依赖模块main.js的加载
 
 main.js加载执行完后 onScriptLoad -> completeLoad -> callGetModule -> main_module.init -> main_module.enable -> 启动main_module依赖模块的加载（注意此时main_moudle.depCount = 2） -> 开始A.js,B.js的加载
 
