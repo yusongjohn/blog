@@ -5,6 +5,32 @@
     <title>Title</title>
 </head>
 <body>
+<script>
 
+    // 这个节流的写法是第一次触发后再等一个timeout触发的
+    function throttle(callback, timeout){
+        let timer;
+        return function(){
+            if (timer) {
+                return;
+            }
+            timer = setTimeout(function(){
+                callback();
+                timer = undefined;
+            }, timeout)
+        }
+    }
+
+    function throttle(callback, timeout){
+        let last = 0;
+        return function(...rest){
+            let now = Date.now();
+            if (now - last > timeout) {
+                last = now;
+                callback(...rest);
+            }
+        }
+    }
+</script>
 </body>
 </html>
