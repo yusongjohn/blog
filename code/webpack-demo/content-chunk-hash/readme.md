@@ -1,4 +1,5 @@
-[参考](https://juejin.im/post/6844903935812059144)
+- [contenthash & chunkhash & hash](https://juejin.im/post/6844903935812059144)
+- [chunk的理解](https://juejin.im/post/6844903889393680392)
 
 - hash: 所有输出结果整体的hash
 - contenthash: 基于输出文件内容的hash
