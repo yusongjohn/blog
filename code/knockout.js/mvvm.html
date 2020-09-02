@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script>
+
         class Subscription {
             constructor(){
                 this.subscribeptions = new Set();
@@ -21,7 +22,7 @@
         }
 
         let currentFrame = [];
-        const currentFrameManipulate = (frame, fun) => {
+        const currentFrameAction = (frame, fun) => {
             currentFrame.push(frame);
             fun();
             currentFrame.pop();
@@ -31,9 +32,9 @@
             const computedObservable = currentFrame[currentFrame.length - 1];
             if (computedObservable) {
                 computedObservable.subscribeToDependency(observable);
-                computedObservable.addDependencyTracking(observable);
+                // computedObservable.addDependencyTracking(observable);
             }
-        }
+        };
 
         class Observable extends Subscription {
             constructor(initialValue, name){
@@ -50,8 +51,8 @@
                     }
                     this.latestValue = newValue;
                     if (this.subscribeptions.size) {
-                        currentFrameManipulate(undefined, () => {
-                            this.notifyAll(this.subscribeptions);
+                        currentFrameAction(undefined, () => {
+                            this.notifyAll(this.latestValue);
                         });
                     }
                 };
@@ -73,15 +74,15 @@
                     observable.subscribe(this.evaluate);
                 };
 
-                this.addDependencyTracking = function(subscription){
-                    if (this.dependencyTracking.has(subscription)) {
-                        return;
-                    }
-                    this.dependencyTracking.add(subscription);
-                };
+                // this.addDependencyTracking = function(subscription){
+                //     if (this.dependencyTracking.has(subscription)) {
+                //         return;
+                //     }
+                //     this.dependencyTracking.add(subscription);
+                // };
 
                 this.evaluate = () => {
-                    currentFrameManipulate(this, () => {
+                    currentFrameAction(this, () => {
                         const newValue = this.readFun();
                         if (this.latestValue !== newValue) {
                             this.latestValue = newValue;
@@ -91,13 +92,13 @@
                     });
                 };
 
-                this.dispose = () => {
-                    if (this.dependencyTracking.size) {
-                        Array.from(this.dependencyTracking).forEach((observable) => {
-                            observable.subscribeptions.remove(this);
-                        })
-                    }
-                };
+                // this.dispose = () => {
+                //     if (this.dependencyTracking.size) {
+                //         Array.from(this.dependencyTracking).forEach((observable) => {
+                //             observable.subscribeptions.remove(this);
+                //         })
+                //     }
+                // };
 
                 this.read = function(){
                     registerDependency(this);
@@ -108,6 +109,37 @@
                 this.evaluate();
             }
         }
+
+
+        //-------------------------------------test----------------------------------
+        const _observable_1 = new Observable('ys', '_observable_1');
+        const _observable_2 = new Observable('sq', '_observable_2');
+
+        const _computeObservable_1 = new ComputedObservable(() => {
+            return _observable_1.read() + ' love ' + _observable_2.read();
+        }, '_computeObservable_1');
+
+        const _computeObservable_2 = new ComputedObservable(() => {
+            return _computeObservable_1.read() + ' forever';
+        }, '_computeObservable_2');
+
+        const _computeObservable_3 = new ComputedObservable(() => {
+            return _computeObservable_1.read() + ' ==== ' + _computeObservable_2.read();
+        }, '_computeObservable_2');
+
+        console.log('1', _computeObservable_3.read());
+
+        setTimeout(function(){
+            _observable_1.write('yusong');
+            console.log('2', _computeObservable_3.read());
+        }, 1000);
+
+        setTimeout(function(){
+            _observable_2.write('sunqing');
+            console.log('3', _computeObservable_3.read());
+        }, 2000);
+
+        console.log('--------------------demo1 end-----------------------')
     </script>
 
     <script>
@@ -131,6 +163,7 @@
                 const arrayValue = value.read();
                 for (let i = 0; i < arrayValue.length; i++) {
                     const clone = node.firstElementChild.cloneNode(true);
+                    clone.innerText = arrayValue[i];
                     node.appendChild(clone);
                 }
                 // 删除第一个元素
@@ -140,7 +173,7 @@
 
         function applyBindings(viewModel, rootNode){
             // 深度优先遍历
-            tranverse(viewModel, rootNode)
+            tranverse(viewModel, rootNode);
         }
 
         function tranverse(viewModel, node){
@@ -157,8 +190,8 @@
             }
         }
 
-        function applyBindingsToNodeInternal(bindingContext, nodeVerified){
-            const bindingsString = nodeVerified.dataset.bind;
+        function applyBindingsToNodeInternal(bindingContext, node){
+            const bindingsString = node.dataset.bind;
             if (!bindingsString)
                 return;
 
@@ -170,12 +203,12 @@
             funBody = funBody.join(',');
             const template = `with($context){return { ${funBody} } }`;
             const templateFun = new Function("$context", "$element", template);
-            const parsedBindings = templateFun(bindingContext, nodeVerified);
+            const parsedBindings = templateFun(bindingContext, node);
 
             for (const key in parsedBindings) {
                 new ComputedObservable(function(){
                     const handler = bindHandlers[key];
-                    handler && handler(nodeVerified, parsedBindings[key]);
+                    handler && handler(node, parsedBindings[key]);
                 })
             }
         }
@@ -183,34 +216,7 @@
 
     <script>
         window.onload = function(){
-
-            const _observable_1 = new Observable('ys', '_observable_1');
-            const _observable_2 = new Observable('sq', '_observable_2');
-
-            const _computeObservable_1 = new ComputedObservable(() => {
-                return _observable_1.read() + ' love ' + _observable_2.read();
-            }, '_computeObservable_1');
-            const _computeObservable_2 = new ComputedObservable(() => {
-                return _computeObservable_1.read() + ' forever';
-            }, '_computeObservable_2');
-            const _computeObservable_3 = new ComputedObservable(() => {
-                return _computeObservable_1.read() + ' ==== ' + _computeObservable_2.read();
-            }, '_computeObservable_2');
-
-            console.log('1', _computeObservable_3.read());
-            setTimeout(function(){
-                _observable_1.write('yusong');
-                console.log('2', _computeObservable_3.read());
-            }, 1000);
-
-            setTimeout(function(){
-                _observable_2.write('sunqing');
-                console.log('3', _computeObservable_3.read());
-            }, 2000);
-
-            // ----------------------------------------------------------------------------------------------------------------------------
-
-            const inputValue = new Observable('yusong-input');
+            const inputValue = new Observable('yusong');
             const arrayObser = new Observable([1, 2, 3, 4]);
             const displayName = new ComputedObservable(function(){
                 return inputValue.read();

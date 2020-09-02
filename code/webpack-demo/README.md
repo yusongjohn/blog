@@ -15,7 +15,7 @@
 
 3. dll、external、tree-shaking等实现，见相应demo
 
-# hrm 原理
+# hmr 原理
 [参考](https://zhuanlan.zhihu.com/p/30669007)
 
 # 原理
