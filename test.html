@@ -6,31 +6,35 @@
 </head>
 <body>
 <script>
-
-    // 这个节流的写法是第一次触发后再等一个timeout触发的
-    function throttle(callback, timeout){
-        let timer;
-        return function(){
-            if (timer) {
-                return;
-            }
-            timer = setTimeout(function(){
-                callback();
-                timer = undefined;
-            }, timeout)
-        }
+    function Foo(){
+        getName = function(){
+            console.log(1);
+        };
+        return this;
     }
 
-    function throttle(callback, timeout){
-        let last = 0;
-        return function(...rest){
-            let now = Date.now();
-            if (now - last > timeout) {
-                last = now;
-                callback(...rest);
-            }
-        }
+    Foo.getName = function(){
+        console.log(2);
+    };
+    Foo.prototype.getName = function(){
+        console.log(3);
+    };
+    var getName = function(){
+        console.log(4);
+    };
+
+    function getName(){
+        console.log(5);
     }
+
+    //请写出以下输出结果并说出为什么
+    Foo.getName();
+    getName();
+    Foo().getName()
+    getName();
+    new Foo.getName();
+    new Foo().getName();
+    new new Foo().getName();
 </script>
 </body>
 </html>

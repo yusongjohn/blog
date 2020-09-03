@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    class TreeNode {
+        constructor(value){
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    //  递归
+    function preOrderRecur(node){
+        if (!node) return;
+        console.log(node);
+        preOrderRecur(node.left);
+        preOrderRecur(node.right);
+    }
+
+    function inOrderRecur(node){
+        if (!node) return;
+        preOrderRecur(node.left);
+        console.log(node);
+        preOrderRecur(node.right);
+    }
+
+    function postOrderRecur(node){
+        if (!node) return;
+        preOrderRecur(node.left);
+        preOrderRecur(node.right);
+        console.log(node);
+    }
+
+    // 非递归
+    function preOrder(node){
+        let stack = [];
+        if (node) {
+            stack.push(node);
+        }
+
+        while (stack.length) {
+            let tmp = stack.pop();
+            console.log(tmp.value);
+            if (tmp.right) {
+                stack.push(tmp.right)
+            }
+            if (tmp.left) {
+                stack.push(tmp.left);
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

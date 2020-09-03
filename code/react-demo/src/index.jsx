@@ -10,7 +10,17 @@ function TestC(){
         setState(2);
     });
 
-    return <div>{state}</div>
+    return <div>{state}
+        {
+            state ? 'dd' : 'ee'
+        }
+
+        {
+            [1, 2, 3].map(function(item){
+                return <div>item</div>
+            })
+        }
+    </div>
 }
 
 ReactDOM.render(<TestC/>, window.document.getElementById('root'));
