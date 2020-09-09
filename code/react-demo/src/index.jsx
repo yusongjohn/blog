@@ -17,7 +17,7 @@ function TestC(){
 
         {
             [1, 2, 3].map(function(item){
-                return <div>item</div>
+                return <div>{item}</div>
             })
         }
     </div>

@@ -14,46 +14,7 @@
         }
     }
 
-    //  递归
-    function preOrderRecur(node){
-        if (!node) return;
-        console.log(node);
-        preOrderRecur(node.left);
-        preOrderRecur(node.right);
-    }
-
-    function inOrderRecur(node){
-        if (!node) return;
-        preOrderRecur(node.left);
-        console.log(node);
-        preOrderRecur(node.right);
-    }
-
-    function postOrderRecur(node){
-        if (!node) return;
-        preOrderRecur(node.left);
-        preOrderRecur(node.right);
-        console.log(node);
-    }
-
-    // 非递归
-    function preOrder(node){
-        let stack = [];
-        if (node) {
-            stack.push(node);
-        }
-
-        while (stack.length) {
-            let tmp = stack.pop();
-            console.log(tmp.value);
-            if (tmp.right) {
-                stack.push(tmp.right)
-            }
-            if (tmp.left) {
-                stack.push(tmp.left);
-            }
-        }
-    }
+    // 非递归方式 https://juejin.im/post/6844903503807119374#heading-1
 
 </script>
 </body>

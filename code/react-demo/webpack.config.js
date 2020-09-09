@@ -11,6 +11,7 @@ module.exports = {
     entry: {
         app: path.resolve(__dirname, 'src/index.jsx'),
     },
+    devtool: 'source-map',
     optimization: {
         runtimeChunk: 'single',
         minimizer: [
