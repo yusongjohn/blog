@@ -1,7 +1,5 @@
-/code/accumulate/tiny-demos/websocket-demo/node_modules/
 /.idea/
-/articles/drafts/.DS_Store
-/articles/drafts/framework/react/.DS_Store
 /code/react-demo/node_modules/
 /code/react-demo/dist/
-/code/accumulate/node_modules/
+*/.DS_Store
+.DS_Store
