@@ -1,1 +1,1 @@
-import Index from './App.vue'
+import App from './App.vue'

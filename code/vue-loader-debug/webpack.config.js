@@ -9,7 +9,7 @@ module.exports = {
         path: path.join(__dirname, 'dist'),
         filename: '[name].js',
     },
-    mode: 'development', // 默认为production, 可以手动设置为development, 区别就是是否进行压缩混淆
+    mode: 'production',
     module: {
         rules: [{
             test: /\.vue$/,
