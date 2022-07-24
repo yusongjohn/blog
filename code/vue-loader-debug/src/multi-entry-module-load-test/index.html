@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="./runtime~main1.js"></script>
+    <script src="./main1.js"></script>
+
+
+    <script>
+        const script1 = document.createElement('script')
+        script1.src = './runtime~main2.js';
+
+        const script2 = document.createElement('script')
+        script2.src = './main2.js';
+
+        setTimeout(() => {
+            debugger
+            document.body.appendChild(script1)
+            document.body.appendChild(script2)
+        }, 1000)
+
+
+    </script>
+    <!-- <script src="./runtime~main2.js"></script>
+        <script src="./main2.js"></script> -->
+</head>
+
+<body></body>
+
+</html>

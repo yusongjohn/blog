@@ -3,7 +3,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-        index: './src/compare-cjs-and-esm/cjs/index.js',
+        cjsIndex: './src/compare-cjs-and-esm/cjs/index.js',
+        esmIndex: './src/compare-cjs-and-esm/esm/index.js',
     },
     // 出口文件配置项
     output: {
@@ -11,12 +12,13 @@ module.exports = {
         filename: '[name].js',
     },
     optimization: {
+        minimize: false,
         runtimeChunk: true,
     },
-    mode: 'production',
+    mode: 'none', // 默认有 模块内联 优化，取消优化
     // 插件
     plugins: [
-        new CopyWebpackPlugin(['./src/compare-cjs-and-esm/cjs/index.html'])
+        new CopyWebpackPlugin(['./src/compare-cjs-and-esm/cjs/cjsIndex.html','./src/compare-cjs-and-esm/esm/esmIndex.html'])
     ]
 
 }

@@ -1,5 +1,5 @@
 const path = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
     entry: {
         main1: './src/multi-entry-module-load-test/main1.js',
@@ -11,10 +11,12 @@ module.exports = {
         filename: '[name].js',
     },
     optimization: {
+        minimize: false,
         runtimeChunk: true,
     },
-    // mode: 'production',
-    mode: 'development',
+    mode: 'production',
+    // devtool: 'cheap-source-map',
+    mode: 'none',
     module: {
         rules: [{
             test: /\.vue$/,
@@ -28,7 +30,7 @@ module.exports = {
     },
     // 插件
     plugins: [
-        new VueLoaderPlugin()
+        new CopyWebpackPlugin(['./src/multi-entry-module-load-test/index.html'])
     ]
 
 }

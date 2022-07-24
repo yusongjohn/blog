@@ -10,9 +10,10 @@ module.exports = {
         filename: '[name].js',
     },
     optimization: {
+        minimize: false,
         runtimeChunk: true,
     },
-    mode: 'production',
+    mode: 'development',
     module: {
         rules: [{
             test: /\.vue$/,
