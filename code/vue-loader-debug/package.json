@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build-vue-loader": "webpack -c webpack.config.vue-loader.js",
+    "build-multi-entry": "webpack -c webpack.config.multi-entry-module-load.js",
+    "compare-cjs-and-esm": "webpack -c webpack.config.compare-cjs-and-esm.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +19,7 @@
     "webpack-cli": "^4.10.0"
   },
   "devDependencies": {
+    "copy-webpack-plugin": "^5.1.1",
     "webpack-cli": "^4.10.0"
   }
 }

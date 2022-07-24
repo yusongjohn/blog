@@ -2,14 +2,19 @@ const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
     entry: {
-        index: './src/index.js',
+        main1: './src/multi-entry-module-load-test/main1.js',
+        main2: './src/multi-entry-module-load-test/main2.js',
     },
     // 出口文件配置项
     output: {
         path: path.join(__dirname, 'dist'),
         filename: '[name].js',
     },
-    mode: 'production',
+    optimization: {
+        runtimeChunk: true,
+    },
+    // mode: 'production',
+    mode: 'development',
     module: {
         rules: [{
             test: /\.vue$/,
