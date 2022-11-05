@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
-        cjsIndex: './src/compare-cjs-and-esm/cjs/index.js',
+        // cjsIndex: './src/compare-cjs-and-esm/cjs/index.js',
         esmIndex: './src/compare-cjs-and-esm/esm/index.js',
     },
     // 出口文件配置项

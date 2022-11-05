@@ -7,7 +7,8 @@
     "build-vue-loader": "webpack -c webpack.config.vue-loader.js",
     "build-moduleGraph-to-chunkGraph": "webpack -c webpack.moduleGraph-to-chunkGraph.js",
     "build-multi-entry": "webpack -c webpack.config.multi-entry-module-load.js",
-    "compare-cjs-and-esm": "webpack -c webpack.config.compare-cjs-and-esm.js"
+    "compare-cjs-and-esm": "webpack -c webpack.config.compare-cjs-and-esm.js",
+    "module-parse": "webpack -c webpack.module-parse"
   },
   "author": "",
   "license": "ISC",
