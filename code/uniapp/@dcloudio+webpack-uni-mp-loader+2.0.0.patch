@@ -1,0 +1,117 @@
+diff --git a/node_modules/@dcloudio/webpack-uni-mp-loader/lib/.DS_Store b/node_modules/@dcloudio/webpack-uni-mp-loader/lib/.DS_Store
+new file mode 100644
+index 0000000..feb500a
+Binary files /dev/null and b/node_modules/@dcloudio/webpack-uni-mp-loader/lib/.DS_Store differ
+diff --git a/node_modules/@dcloudio/webpack-uni-mp-loader/lib/plugin/generate-json.js b/node_modules/@dcloudio/webpack-uni-mp-loader/lib/plugin/generate-json.js
+index ab8fe09..43230ac 100644
+--- a/node_modules/@dcloudio/webpack-uni-mp-loader/lib/plugin/generate-json.js
++++ b/node_modules/@dcloudio/webpack-uni-mp-loader/lib/plugin/generate-json.js
+@@ -101,6 +101,7 @@ module.exports = function generateJson (compilation) {
+   analyzeUsingComponents()
+ 
+   const jsonFileMap = getChangedJsonFileMap()
++  const _tmpFileMap = Object.create(null);
+   for (const name of jsonFileMap.keys()) {
+     const jsonObj = JSON.parse(jsonFileMap.get(name))
+     if (process.env.UNI_PLATFORM === 'app-plus') { // App平台默认增加usingComponents,激活__wxAppCode__
+@@ -187,7 +188,6 @@ module.exports = function generateJson (compilation) {
+     if ((process.env.UNI_SUBPACKGE || process.env.UNI_MP_PLUGIN) && jsonObj.usingComponents) {
+       jsonObj.usingComponents = normalizeUsingComponents(name, jsonObj.usingComponents)
+     }  
+-    const source = JSON.stringify(jsonObj, null, 2)
+ 
+     const jsFile = name.replace('.json', '.js')
+     if (
+@@ -212,6 +212,45 @@ module.exports = function generateJson (compilation) {
+       }
+       compilation.assets[jsFile] = jsFileAsset
+     }
++
++    _tmpFileMap[name] = jsonObj;
++  }
++
++  const subRoots = _tmpFileMap['app.json'].subPackages.map(item => item.root);
++  function isInOther(targetPath, exceptSubRoot) {
++    const res = subRoots.find(subRoot => (targetPath.startsWith('/' + subRoot) && subRoot !== exceptSubRoot))
++    console.log(targetPath, exceptSubRoot, res)
++    return res
++  }
++  
++  const allJsonFilePaths = Object.keys(_tmpFileMap)
++  
++  allJsonFilePaths.forEach(jsonFilePath => {
++    const jsonObj = _tmpFileMap[jsonFilePath]
++    const usingComponents = jsonObj.usingComponents || {}
++    const componentPlaceholderInfo = {};
++    const componentKeys = Object.keys(usingComponents)
++    if (!componentKeys.length) {
++      return
++    }
++
++    function getSubRoot(jsonFilePath) {
++      return subRoots.find(subRoot => (jsonFilePath.startsWith(subRoot)))
++    } 
++    const subRoot = getSubRoot(jsonFilePath);
++    (componentKeys || []).forEach(componentKey => {
++      const componentJsonFilePath = usingComponents[componentKey]
++      // targetPath usingComponents中的路径，这里都是绝对路径
++      if (isInOther(componentJsonFilePath, subRoot)) {
++        componentPlaceholderInfo[componentKey] = 'view'
++      }
++    })
++    console.log(jsonFilePath, usingComponents, componentPlaceholderInfo)
++    jsonObj.componentPlaceholder = componentPlaceholderInfo
++  })
++
++  function _emitJsonFile(name, jsonObj) {
++    const source = JSON.stringify(jsonObj, null, 2)
+     const jsonAsset = {
+       size () {
+         return Buffer.byteLength(source, 'utf8')
+@@ -223,6 +262,12 @@ module.exports = function generateJson (compilation) {
+ 
+     compilation.assets[name] = jsonAsset
+   }
++
++  allJsonFilePaths.forEach(jsonFilePath => {
++    const jsonObj = _tmpFileMap[jsonFilePath]
++    _emitJsonFile(jsonFilePath, jsonObj)
++  })
++
+   if (process.env.UNI_USING_CACHE && jsonFileMap.size) {
+     setTimeout(() => {
+       require('@dcloudio/uni-cli-shared/lib/cache').store()
+diff --git a/node_modules/@dcloudio/webpack-uni-mp-loader/lib/plugin/generate-pages-wxml.bak b/node_modules/@dcloudio/webpack-uni-mp-loader/lib/plugin/generate-pages-wxml.bak
+deleted file mode 100644
+index 2294ea3..0000000
+--- a/node_modules/@dcloudio/webpack-uni-mp-loader/lib/plugin/generate-pages-wxml.bak
++++ /dev/null
+@@ -1,28 +0,0 @@
+-const path = require('path')
+-
+-const {
+-  getPlatformExts
+-} = require('../shared')
+-
+-const ROOT_DATA_VAR = '$root'
+-
+-function generatePageWxml (name, importee) {
+-  if (process.env.UNI_PLATFORM === 'mp-baidu') {
+-    return `<import src="${importee}" />
+-    <template is="${name}" data="{{{ ...${ROOT_DATA_VAR}['0'], ${ROOT_DATA_VAR} }}}"/>`
+-  } else if (process.env.UNI_PLATFORM === 'mp-alipay') {
+-    return `<template is="${name}" data="{{ ...${ROOT_DATA_VAR}['0'], ${ROOT_DATA_VAR} }}"/>`
+-  }
+-  return `<import src="${importee}" />
+-    <template is="${name}" data="{{ ...${ROOT_DATA_VAR}['0'], ${ROOT_DATA_VAR} }}"/>`
+-}
+-
+-module.exports = function generatePagesWxml (pages, subPages) {
+-  return Object.keys(pages).map(page => { // page wxml
+-    const ext = getPlatformExts().template
+-    return {
+-      file: page + ext,
+-      source: generatePageWxml(pages[page], `./${path.basename(page)}.vue${ext}`)
+-    }
+-  })
+-}
