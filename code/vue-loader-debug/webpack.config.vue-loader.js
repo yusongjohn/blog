@@ -13,6 +13,7 @@ module.exports = {
         minimize: false,
         runtimeChunk: true,
     },
+    devtool: "cheap-source-map",
     mode: 'development',
     module: {
         rules: [{

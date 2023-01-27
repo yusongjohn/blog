@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ce9c3144-21cf-44c9-850d-1cac815ca4f8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/数据驱动-对象为例/Dep.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/数据驱动-对象为例/Watcher.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/数据驱动-对象为例/api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/数据驱动-对象为例/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/数据驱动-对象为例/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/数据驱动-对象为例/observe.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/观察者模式/Dep.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/观察者模式/Watcher.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/观察者模式/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/观察者模式/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/vue-loader-debug/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/code/vue-loader-debug/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/vue-loader-debug/src/vue-loader-test/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/vue-loader-debug/src/vue-loader-test/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/vue-loader-debug/webpack.config.vue-loader.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/vue-loader-debug/webpack.config.vue-loader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/vue-loader-debug/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/code/vue-loader-debug/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2HYvwcxuOSF687tOQc5ufbzW2XT" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/songyu/songyu/myBlog/code/vue-2.6.11 analyze demo/数据驱动-对象为例",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/数据驱动-对象为例" />
+      <recent name="$PROJECT_DIR$/code/vue-2.6.11 analyze demo/观察者模式" />
+      <recent name="$PROJECT_DIR$/code/mp/uniapp/v2.6.11-compare" />
+      <recent name="$PROJECT_DIR$/code/snabbdom-test" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/code/uniapp" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ce9c3144-21cf-44c9-850d-1cac815ca4f8" name="Changes" comment="" />
+      <created>1668475070625</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668475070625</updated>
+      <workItem from="1668475072152" duration="58000" />
+      <workItem from="1668563906770" duration="4154000" />
+      <workItem from="1669702833981" duration="2000" />
+      <workItem from="1669866397207" duration="236000" />
+      <workItem from="1673580132402" duration="1695000" />
+      <workItem from="1673602547290" duration="43000" />
+      <workItem from="1673831881255" duration="1529000" />
+      <workItem from="1674805439098" duration="266000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
