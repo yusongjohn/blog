@@ -1,14 +1,15 @@
-import {defineReactive} from "./observe.js";
+import { defineReactive } from "./observe.js";
 
-export function set(watcher, key, val) {
-  if (key in watcher && !(key in Object.prototype)) {
-    watcher[key] = val
+export function set(data, key, val) {
+  //... 数组场景
+
+  if (key in data && !(key in Object.prototype)) {
+    data[key] = val
     return val
   }
-  const ob = (watcher).__ob__
-
+  const ob = (data).__ob__
   if (!ob) {
-    watcher[key] = val
+    data[key] = val
     return val
   }
   defineReactive(ob.value, key, val)
@@ -16,13 +17,16 @@ export function set(watcher, key, val) {
   return val
 }
 
-export function del(watcher, key) {
-  const ob = (watcher).__ob__
-  if (watcher.hasOwnProperty(key)) {
+export function del(target, key) {
+  if (Array.isArray(target) && isValidArrayIndex(key)) {
+    target.splice(key, 1)
     return
   }
-
-  delete watcher[key]
+  const ob = (target).__ob__
+  if (!hasOwn(target, key)) {
+    return
+  }
+  delete target[key]
   if (!ob) {
     return
   }

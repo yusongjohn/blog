@@ -3,7 +3,7 @@ let uid = 0;
 export default class Watcher {
   constructor() {
     this.deps = []
-    this.id = `observer_${uid++}`;
+    this.id = `Watcher${uid++}`;
   }
 
   addDep(dep) {
