@@ -1,6 +1,6 @@
-import { observe } from "./observe.js";
+import {observe} from "./observe.js";
 import Watcher from "./Watcher.js";
-import { set, del } from "./api.js";
+import {set, del} from "./api.js";
 
 function main_1() {
     const data = {
@@ -30,7 +30,7 @@ function main_1() {
 
     console.log('派发更新------------watcher_1')
     // 派发跟新
-    data.b = { d: 'd' }
+    data.b = {d: 'd'}
     console.log('派发更新------------watcher_2')
     data.a = 'a_1'
 
@@ -63,7 +63,38 @@ function main_2() {
     // console.log('api新增属性------')
     // set(data.b, 'd', 'd')
 
-    set(data, 'e', 'e')
+    // set(data, 'e', 'e')
 
 }
-main_2()
+
+// main_2()
+
+function main_3() {
+    const data = {
+        arr_1: [1, 2, 3],
+        arr_2: [1, 2, 3]
+    }
+
+    observe(data)
+    // debugger
+    new Watcher(function () {
+        console.log('数组更新回调 读取数据，建立双向关系', JSON.stringify(data.arr_1, data.arr_2));
+    }, function () {
+        console.log('数组更新回调', JSON.stringify(data))
+    })
+
+    console.log('更新对象属性-------begin')
+    data.arr_1[1] = 'x' // 不是响应性的
+    console.log('-----------------------')
+    data.arr_1.length = 2 // 不是响
+    console.log('更新对象属性-------end')
+
+    // console.log('数组添加新元素-------begin')
+    const newLength = 2;
+    set(data.arr_2, 1, 'x');
+    console.log('-----------------------')
+    data.arr_2.splice(newLength) // 等价于 data.arr.length = newLength
+    // console.log('数组添加新元素-------end')
+}
+
+main_3();
