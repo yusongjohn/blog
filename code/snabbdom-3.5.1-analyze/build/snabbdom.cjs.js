@@ -1,121 +1,5 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-/******/ 	var __webpack_modules__ = ({
+'use strict';
 
-/***/ "./node_modules/snabbdom/build/h.js":
-/*!******************************************!*\
-  !*** ./node_modules/snabbdom/build/h.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addNS": () => (/* binding */ addNS),
-/* harmony export */   "fragment": () => (/* binding */ fragment),
-/* harmony export */   "h": () => (/* binding */ h)
-/* harmony export */ });
-/* harmony import */ var _vnode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vnode */ "./node_modules/snabbdom/build/vnode.js");
-/* harmony import */ var _is__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./is */ "./node_modules/snabbdom/build/is.js");
-
-
-function addNS(data, children, sel) {
-    data.ns = "http://www.w3.org/2000/svg";
-    if (sel !== "foreignObject" && children !== undefined) {
-        for (let i = 0; i < children.length; ++i) {
-            const child = children[i];
-            if (typeof child === "string")
-                continue;
-            const childData = child.data;
-            if (childData !== undefined) {
-                addNS(childData, child.children, child.sel);
-            }
-        }
-    }
-}
-function h(sel, b, c) {
-    let data = {};
-    let children;
-    let text;
-    let i;
-    if (c !== undefined) {
-        if (b !== null) {
-            data = b;
-        }
-        if (_is__WEBPACK_IMPORTED_MODULE_0__.array(c)) {
-            children = c;
-        }
-        else if (_is__WEBPACK_IMPORTED_MODULE_0__.primitive(c)) {
-            text = c.toString();
-        }
-        else if (c && c.sel) {
-            children = [c];
-        }
-    }
-    else if (b !== undefined && b !== null) {
-        if (_is__WEBPACK_IMPORTED_MODULE_0__.array(b)) {
-            children = b;
-        }
-        else if (_is__WEBPACK_IMPORTED_MODULE_0__.primitive(b)) {
-            text = b.toString();
-        }
-        else if (b && b.sel) {
-            children = [b];
-        }
-        else {
-            data = b;
-        }
-    }
-    if (children !== undefined) {
-        for (i = 0; i < children.length; ++i) {
-            if (_is__WEBPACK_IMPORTED_MODULE_0__.primitive(children[i]))
-                children[i] = (0,_vnode__WEBPACK_IMPORTED_MODULE_1__.vnode)(undefined, undefined, undefined, children[i], undefined);
-        }
-    }
-    if (sel[0] === "s" &&
-        sel[1] === "v" &&
-        sel[2] === "g" &&
-        (sel.length === 3 || sel[3] === "." || sel[3] === "#")) {
-        addNS(data, children, sel);
-    }
-    return (0,_vnode__WEBPACK_IMPORTED_MODULE_1__.vnode)(sel, data, children, text, undefined);
-}
-/**
- * @experimental
- */
-function fragment(children) {
-    let c;
-    let text;
-    if (_is__WEBPACK_IMPORTED_MODULE_0__.array(children)) {
-        c = children;
-    }
-    else if (_is__WEBPACK_IMPORTED_MODULE_0__.primitive(c)) {
-        text = children;
-    }
-    else if (c && c.sel) {
-        c = [children];
-    }
-    if (c !== undefined) {
-        for (let i = 0; i < c.length; ++i) {
-            if (_is__WEBPACK_IMPORTED_MODULE_0__.primitive(c[i]))
-                c[i] = (0,_vnode__WEBPACK_IMPORTED_MODULE_1__.vnode)(undefined, undefined, undefined, c[i], undefined);
-        }
-    }
-    return (0,_vnode__WEBPACK_IMPORTED_MODULE_1__.vnode)(undefined, {}, c, text, undefined);
-}
-//# sourceMappingURL=h.js.map
-
-/***/ }),
-
-/***/ "./node_modules/snabbdom/build/htmldomapi.js":
-/*!***************************************************!*\
-  !*** ./node_modules/snabbdom/build/htmldomapi.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "htmlDomApi": () => (/* binding */ htmlDomApi)
-/* harmony export */ });
 function createElement(tagName, options) {
     return document.createElement(tagName, options);
 }
@@ -132,18 +16,18 @@ function createComment(text) {
     return document.createComment(text);
 }
 function insertBefore(parentNode, newNode, referenceNode) {
-    if (isDocumentFragment(parentNode)) {
+    if (isDocumentFragment$1(parentNode)) {
         let node = parentNode;
-        while (node && isDocumentFragment(node)) {
+        while (node && isDocumentFragment$1(node)) {
             const fragment = parseFragment(node);
             node = fragment.parent;
         }
         parentNode = node !== null && node !== void 0 ? node : parentNode;
     }
-    if (isDocumentFragment(newNode)) {
+    if (isDocumentFragment$1(newNode)) {
         newNode = parseFragment(newNode, parentNode);
     }
-    if (referenceNode && isDocumentFragment(referenceNode)) {
+    if (referenceNode && isDocumentFragment$1(referenceNode)) {
         referenceNode = parseFragment(referenceNode).firstChildNode;
     }
     parentNode.insertBefore(newNode, referenceNode);
@@ -152,14 +36,14 @@ function removeChild(node, child) {
     node.removeChild(child);
 }
 function appendChild(node, child) {
-    if (isDocumentFragment(child)) {
+    if (isDocumentFragment$1(child)) {
         child = parseFragment(child, node);
     }
     node.appendChild(child);
 }
 function parentNode(node) {
-    if (isDocumentFragment(node)) {
-        while (node && isDocumentFragment(node)) {
+    if (isDocumentFragment$1(node)) {
+        while (node && isDocumentFragment$1(node)) {
             const fragment = parseFragment(node);
             node = fragment.parent;
         }
@@ -169,7 +53,7 @@ function parentNode(node) {
 }
 function nextSibling(node) {
     var _a;
-    if (isDocumentFragment(node)) {
+    if (isDocumentFragment$1(node)) {
         const fragment = parseFragment(node);
         const parent = parentNode(fragment);
         if (parent && fragment.lastChildNode) {
@@ -190,7 +74,7 @@ function setTextContent(node, text) {
 function getTextContent(node) {
     return node.textContent;
 }
-function isElement(node) {
+function isElement$1(node) {
     return node.nodeType === 1;
 }
 function isText(node) {
@@ -199,7 +83,7 @@ function isText(node) {
 function isComment(node) {
     return node.nodeType === 8;
 }
-function isDocumentFragment(node) {
+function isDocumentFragment$1(node) {
     return node.nodeType === 11;
 }
 function parseFragment(fragmentNode, parentNode) {
@@ -224,30 +108,24 @@ const htmlDomApi = {
     tagName,
     setTextContent,
     getTextContent,
-    isElement,
+    isElement: isElement$1,
     isText,
     isComment,
-    isDocumentFragment,
+    isDocumentFragment: isDocumentFragment$1,
 };
-//# sourceMappingURL=htmldomapi.js.map
 
-/***/ }),
+function vnode(sel, data, children, text, elm) {
+    const key = data === undefined ? undefined : data.key;
+    return { sel, data, children, text, elm, key };
+}
 
-/***/ "./node_modules/snabbdom/build/init.js":
-/*!*********************************************!*\
-  !*** ./node_modules/snabbdom/build/init.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "init": () => (/* binding */ init)
-/* harmony export */ });
-/* harmony import */ var _vnode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./vnode */ "./node_modules/snabbdom/build/vnode.js");
-/* harmony import */ var _is__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./is */ "./node_modules/snabbdom/build/is.js");
-/* harmony import */ var _htmldomapi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./htmldomapi */ "./node_modules/snabbdom/build/htmldomapi.js");
-
-
+const array = Array.isArray;
+function primitive(s) {
+    return (typeof s === "string" ||
+        typeof s === "number" ||
+        s instanceof String ||
+        s instanceof Number);
+}
 
 function isUndef(s) {
     return s === undefined;
@@ -255,7 +133,7 @@ function isUndef(s) {
 function isDef(s) {
     return s !== undefined;
 }
-const emptyNode = (0,_vnode__WEBPACK_IMPORTED_MODULE_0__.vnode)("", {}, [], undefined, undefined);
+const emptyNode = vnode("", {}, [], undefined, undefined);
 function sameVnode(vnode1, vnode2) {
     var _a, _b;
     const isSameKey = vnode1.key === vnode2.key;
@@ -297,7 +175,7 @@ const hooks = [
     "pre",
     "post",
 ];
-function init(modules, domApi, options) {
+function init$1(modules, domApi, options) {
     const cbs = {
         create: [],
         update: [],
@@ -306,7 +184,7 @@ function init(modules, domApi, options) {
         pre: [],
         post: [],
     };
-    const api = domApi !== undefined ? domApi : _htmldomapi__WEBPACK_IMPORTED_MODULE_1__.htmlDomApi;
+    const api = domApi !== undefined ? domApi : htmlDomApi;
     for (const hook of hooks) {
         for (const module of modules) {
             const currentHook = module[hook];
@@ -321,10 +199,10 @@ function init(modules, domApi, options) {
         // https://stackoverflow.com/questions/29454340/detecting-classname-of-svganimatedstring
         const classes = elm.getAttribute("class");
         const c = classes ? "." + classes.split(" ").join(".") : "";
-        return (0,_vnode__WEBPACK_IMPORTED_MODULE_0__.vnode)(api.tagName(elm).toLowerCase() + id + c, {}, [], undefined, elm);
+        return vnode(api.tagName(elm).toLowerCase() + id + c, {}, [], undefined, elm);
     }
     function emptyDocumentFragmentAt(frag) {
-        return (0,_vnode__WEBPACK_IMPORTED_MODULE_0__.vnode)(undefined, {}, [], undefined, frag);
+        return vnode(undefined, {}, [], undefined, frag);
     }
     function createRmCb(childElm, listeners) {
         return function rmCb() {
@@ -372,7 +250,7 @@ function init(modules, domApi, options) {
                 elm.setAttribute("class", sel.slice(dot + 1).replace(/\./g, " "));
             for (i = 0; i < cbs.create.length; ++i)
                 cbs.create[i](emptyNode, vnode);
-            if (_is__WEBPACK_IMPORTED_MODULE_2__.array(children)) {
+            if (array(children)) {
                 for (i = 0; i < children.length; ++i) {
                     const ch = children[i];
                     if (ch != null) {
@@ -380,7 +258,7 @@ function init(modules, domApi, options) {
                     }
                 }
             }
-            else if (_is__WEBPACK_IMPORTED_MODULE_2__.primitive(vnode.text)) {
+            else if (primitive(vnode.text)) {
                 api.appendChild(elm, api.createTextNode(vnode.text));
             }
             const hook = vnode.data.hook;
@@ -619,42 +497,302 @@ function init(modules, domApi, options) {
         return vnode;
     };
 }
-//# sourceMappingURL=init.js.map
 
-/***/ }),
-
-/***/ "./node_modules/snabbdom/build/is.js":
-/*!*******************************************!*\
-  !*** ./node_modules/snabbdom/build/is.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "array": () => (/* binding */ array),
-/* harmony export */   "primitive": () => (/* binding */ primitive)
-/* harmony export */ });
-const array = Array.isArray;
-function primitive(s) {
-    return (typeof s === "string" ||
-        typeof s === "number" ||
-        s instanceof String ||
-        s instanceof Number);
+function addNS(data, children, sel) {
+    data.ns = "http://www.w3.org/2000/svg";
+    if (sel !== "foreignObject" && children !== undefined) {
+        for (let i = 0; i < children.length; ++i) {
+            const child = children[i];
+            if (typeof child === "string")
+                continue;
+            const childData = child.data;
+            if (childData !== undefined) {
+                addNS(childData, child.children, child.sel);
+            }
+        }
+    }
 }
-//# sourceMappingURL=is.js.map
+function h(sel, b, c) {
+    let data = {};
+    let children;
+    let text;
+    let i;
+    if (c !== undefined) {
+        if (b !== null) {
+            data = b;
+        }
+        if (array(c)) {
+            children = c;
+        }
+        else if (primitive(c)) {
+            text = c.toString();
+        }
+        else if (c && c.sel) {
+            children = [c];
+        }
+    }
+    else if (b !== undefined && b !== null) {
+        if (array(b)) {
+            children = b;
+        }
+        else if (primitive(b)) {
+            text = b.toString();
+        }
+        else if (b && b.sel) {
+            children = [b];
+        }
+        else {
+            data = b;
+        }
+    }
+    if (children !== undefined) {
+        for (i = 0; i < children.length; ++i) {
+            if (primitive(children[i]))
+                children[i] = vnode(undefined, undefined, undefined, children[i], undefined);
+        }
+    }
+    if (sel[0] === "s" &&
+        sel[1] === "v" &&
+        sel[2] === "g" &&
+        (sel.length === 3 || sel[3] === "." || sel[3] === "#")) {
+        addNS(data, children, sel);
+    }
+    return vnode(sel, data, children, text, undefined);
+}
+/**
+ * @experimental
+ */
+function fragment(children) {
+    let c;
+    let text;
+    if (array(children)) {
+        c = children;
+    }
+    else if (primitive(c)) {
+        text = children;
+    }
+    else if (c && c.sel) {
+        c = [children];
+    }
+    if (c !== undefined) {
+        for (let i = 0; i < c.length; ++i) {
+            if (primitive(c[i]))
+                c[i] = vnode(undefined, undefined, undefined, c[i], undefined);
+        }
+    }
+    return vnode(undefined, {}, c, text, undefined);
+}
 
-/***/ }),
+function copyToThunk(vnode, thunk) {
+    var _a;
+    const ns = (_a = thunk.data) === null || _a === void 0 ? void 0 : _a.ns;
+    vnode.data.fn = thunk.data.fn;
+    vnode.data.args = thunk.data.args;
+    thunk.data = vnode.data;
+    thunk.children = vnode.children;
+    thunk.text = vnode.text;
+    thunk.elm = vnode.elm;
+    if (ns)
+        addNS(thunk.data, thunk.children, thunk.sel);
+}
+function init(thunk) {
+    const cur = thunk.data;
+    const vnode = cur.fn(...cur.args);
+    copyToThunk(vnode, thunk);
+}
+function prepatch(oldVnode, thunk) {
+    let i;
+    const old = oldVnode.data;
+    const cur = thunk.data;
+    const oldArgs = old.args;
+    const args = cur.args;
+    if (old.fn !== cur.fn || oldArgs.length !== args.length) {
+        copyToThunk(cur.fn(...args), thunk);
+        return;
+    }
+    for (i = 0; i < args.length; ++i) {
+        if (oldArgs[i] !== args[i]) {
+            copyToThunk(cur.fn(...args), thunk);
+            return;
+        }
+    }
+    copyToThunk(oldVnode, thunk);
+}
+const thunk = function thunk(sel, key, fn, args) {
+    if (args === undefined) {
+        args = fn;
+        fn = key;
+        key = undefined;
+    }
+    return h(sel, {
+        key: key,
+        hook: { init, prepatch },
+        fn: fn,
+        args: args,
+    });
+};
 
-/***/ "./node_modules/snabbdom/build/modules/class.js":
-/*!******************************************************!*\
-  !*** ./node_modules/snabbdom/build/modules/class.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+function pre(vnode, newVnode) {
+    const attachData = vnode.data.attachData;
+    // Copy created placeholder and real element from old vnode
+    newVnode.data.attachData.placeholder = attachData.placeholder;
+    newVnode.data.attachData.real = attachData.real;
+    // Mount real element in vnode so the patch process operates on it
+    vnode.elm = vnode.data.attachData.real;
+}
+function post(_, vnode) {
+    // Mount dummy placeholder in vnode so potential reorders use it
+    vnode.elm = vnode.data.attachData.placeholder;
+}
+function destroy(vnode) {
+    // Remove placeholder
+    if (vnode.elm !== undefined) {
+        vnode.elm.parentNode.removeChild(vnode.elm);
+    }
+    // Remove real element from where it was inserted
+    vnode.elm = vnode.data.attachData.real;
+}
+function create(_, vnode) {
+    const real = vnode.elm;
+    const attachData = vnode.data.attachData;
+    const placeholder = document.createElement("span");
+    // Replace actual element with dummy placeholder
+    // Snabbdom will then insert placeholder instead
+    vnode.elm = placeholder;
+    attachData.target.appendChild(real);
+    attachData.real = real;
+    attachData.placeholder = placeholder;
+}
+function attachTo(target, vnode) {
+    if (vnode.data === undefined)
+        vnode.data = {};
+    if (vnode.data.hook === undefined)
+        vnode.data.hook = {};
+    const data = vnode.data;
+    const hook = vnode.data.hook;
+    data.attachData = { target: target, placeholder: undefined, real: undefined };
+    hook.create = create;
+    hook.prepatch = pre;
+    hook.postpatch = post;
+    hook.destroy = destroy;
+    return vnode;
+}
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "classModule": () => (/* binding */ classModule)
-/* harmony export */ });
+function toVNode(node, domApi) {
+    const api = domApi !== undefined ? domApi : htmlDomApi;
+    let text;
+    if (api.isElement(node)) {
+        const id = node.id ? "#" + node.id : "";
+        const cn = node.getAttribute("class");
+        const c = cn ? "." + cn.split(" ").join(".") : "";
+        const sel = api.tagName(node).toLowerCase() + id + c;
+        const attrs = {};
+        const dataset = {};
+        const data = {};
+        const children = [];
+        let name;
+        let i, n;
+        const elmAttrs = node.attributes;
+        const elmChildren = node.childNodes;
+        for (i = 0, n = elmAttrs.length; i < n; i++) {
+            name = elmAttrs[i].nodeName;
+            if (name[0] === "d" &&
+                name[1] === "a" &&
+                name[2] === "t" &&
+                name[3] === "a" &&
+                name[4] === "-") {
+                dataset[name.slice(5)] = elmAttrs[i].nodeValue || "";
+            }
+            else if (name !== "id" && name !== "class") {
+                attrs[name] = elmAttrs[i].nodeValue;
+            }
+        }
+        for (i = 0, n = elmChildren.length; i < n; i++) {
+            children.push(toVNode(elmChildren[i], domApi));
+        }
+        if (Object.keys(attrs).length > 0)
+            data.attrs = attrs;
+        if (Object.keys(dataset).length > 0)
+            data.dataset = dataset;
+        if (sel[0] === "s" &&
+            sel[1] === "v" &&
+            sel[2] === "g" &&
+            (sel.length === 3 || sel[3] === "." || sel[3] === "#")) {
+            addNS(data, children, sel);
+        }
+        return vnode(sel, data, children, undefined, node);
+    }
+    else if (api.isText(node)) {
+        text = api.getTextContent(node);
+        return vnode(undefined, undefined, undefined, text, node);
+    }
+    else if (api.isComment(node)) {
+        text = api.getTextContent(node);
+        return vnode("!", {}, [], text, node);
+    }
+    else {
+        return vnode("", {}, [], undefined, node);
+    }
+}
+
+const xlinkNS = "http://www.w3.org/1999/xlink";
+const xmlNS = "http://www.w3.org/XML/1998/namespace";
+const colonChar = 58;
+const xChar = 120;
+function updateAttrs(oldVnode, vnode) {
+    let key;
+    const elm = vnode.elm;
+    let oldAttrs = oldVnode.data.attrs;
+    let attrs = vnode.data.attrs;
+    if (!oldAttrs && !attrs)
+        return;
+    if (oldAttrs === attrs)
+        return;
+    oldAttrs = oldAttrs || {};
+    attrs = attrs || {};
+    // update modified attributes, add new attributes
+    for (key in attrs) {
+        const cur = attrs[key];
+        const old = oldAttrs[key];
+        if (old !== cur) {
+            if (cur === true) {
+                elm.setAttribute(key, "");
+            }
+            else if (cur === false) {
+                elm.removeAttribute(key);
+            }
+            else {
+                if (key.charCodeAt(0) !== xChar) {
+                    elm.setAttribute(key, cur);
+                }
+                else if (key.charCodeAt(3) === colonChar) {
+                    // Assume xml namespace
+                    elm.setAttributeNS(xmlNS, key, cur);
+                }
+                else if (key.charCodeAt(5) === colonChar) {
+                    // Assume xlink namespace
+                    elm.setAttributeNS(xlinkNS, key, cur);
+                }
+                else {
+                    elm.setAttribute(key, cur);
+                }
+            }
+        }
+    }
+    // remove removed attributes
+    // use `in` operator since the previous `for` iteration uses it (.i.e. add even attributes with undefined value)
+    // the other option is to remove all attributes with value == undefined
+    for (key in oldAttrs) {
+        if (!(key in attrs)) {
+            elm.removeAttribute(key);
+        }
+    }
+}
+const attributesModule = {
+    create: updateAttrs,
+    update: updateAttrs,
+};
+
 function updateClass(oldVnode, vnode) {
     let cur;
     let name;
@@ -681,20 +819,48 @@ function updateClass(oldVnode, vnode) {
     }
 }
 const classModule = { create: updateClass, update: updateClass };
-//# sourceMappingURL=class.js.map
 
-/***/ }),
+const CAPS_REGEX = /[A-Z]/g;
+function updateDataset(oldVnode, vnode) {
+    const elm = vnode.elm;
+    let oldDataset = oldVnode.data.dataset;
+    let dataset = vnode.data.dataset;
+    let key;
+    if (!oldDataset && !dataset)
+        return;
+    if (oldDataset === dataset)
+        return;
+    oldDataset = oldDataset || {};
+    dataset = dataset || {};
+    const d = elm.dataset;
+    for (key in oldDataset) {
+        if (!dataset[key]) {
+            if (d) {
+                if (key in d) {
+                    delete d[key];
+                }
+            }
+            else {
+                elm.removeAttribute("data-" + key.replace(CAPS_REGEX, "-$&").toLowerCase());
+            }
+        }
+    }
+    for (key in dataset) {
+        if (oldDataset[key] !== dataset[key]) {
+            if (d) {
+                d[key] = dataset[key];
+            }
+            else {
+                elm.setAttribute("data-" + key.replace(CAPS_REGEX, "-$&").toLowerCase(), dataset[key]);
+            }
+        }
+    }
+}
+const datasetModule = {
+    create: updateDataset,
+    update: updateDataset,
+};
 
-/***/ "./node_modules/snabbdom/build/modules/eventlisteners.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/snabbdom/build/modules/eventlisteners.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "eventListenersModule": () => (/* binding */ eventListenersModule)
-/* harmony export */ });
 function invokeHandler(handler, vnode, event) {
     if (typeof handler === "function") {
         // call function handler
@@ -778,20 +944,7 @@ const eventListenersModule = {
     update: updateEventListeners,
     destroy: updateEventListeners,
 };
-//# sourceMappingURL=eventlisteners.js.map
 
-/***/ }),
-
-/***/ "./node_modules/snabbdom/build/modules/props.js":
-/*!******************************************************!*\
-  !*** ./node_modules/snabbdom/build/modules/props.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "propsModule": () => (/* binding */ propsModule)
-/* harmony export */ });
 function updateProps(oldVnode, vnode) {
     let key;
     let cur;
@@ -814,20 +967,7 @@ function updateProps(oldVnode, vnode) {
     }
 }
 const propsModule = { create: updateProps, update: updateProps };
-//# sourceMappingURL=props.js.map
 
-/***/ }),
-
-/***/ "./node_modules/snabbdom/build/modules/style.js":
-/*!******************************************************!*\
-  !*** ./node_modules/snabbdom/build/modules/style.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "styleModule": () => (/* binding */ styleModule)
-/* harmony export */ });
 // Bindig `requestAnimationFrame` like this fixes a bug in IE/Edge. See #360 and #409.
 const raf = (typeof window !== "undefined" &&
     window.requestAnimationFrame.bind(window)) ||
@@ -941,153 +1081,82 @@ const styleModule = {
     destroy: applyDestroyStyle,
     remove: applyRemoveStyle,
 };
-//# sourceMappingURL=style.js.map
 
-/***/ }),
-
-/***/ "./node_modules/snabbdom/build/vnode.js":
-/*!**********************************************!*\
-  !*** ./node_modules/snabbdom/build/vnode.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "vnode": () => (/* binding */ vnode)
-/* harmony export */ });
-function vnode(sel, data, children, text, elm) {
-    const key = data === undefined ? undefined : data.key;
-    return { sel, data, children, text, elm, key };
+/* eslint-disable @typescript-eslint/no-namespace, import/export */
+function Fragment(data, ...children) {
+    const flatChildren = flattenAndFilter(children, []);
+    if (flatChildren.length === 1 &&
+        !flatChildren[0].sel &&
+        flatChildren[0].text) {
+        // only child is a simple text node, pass as text for a simpler vtree
+        return vnode(undefined, undefined, undefined, flatChildren[0].text, undefined);
+    }
+    else {
+        return vnode(undefined, data !== null && data !== void 0 ? data : {}, flatChildren, undefined, undefined);
+    }
 }
-//# sourceMappingURL=vnode.js.map
-
-/***/ })
-
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var snabbdom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! snabbdom */ "./node_modules/snabbdom/build/init.js");
-/* harmony import */ var snabbdom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! snabbdom */ "./node_modules/snabbdom/build/modules/class.js");
-/* harmony import */ var snabbdom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! snabbdom */ "./node_modules/snabbdom/build/modules/props.js");
-/* harmony import */ var snabbdom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! snabbdom */ "./node_modules/snabbdom/build/modules/style.js");
-/* harmony import */ var snabbdom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! snabbdom */ "./node_modules/snabbdom/build/modules/eventlisteners.js");
-/* harmony import */ var snabbdom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! snabbdom */ "./node_modules/snabbdom/build/h.js");
-
-
-const patch = (0,snabbdom__WEBPACK_IMPORTED_MODULE_0__.init)([snabbdom__WEBPACK_IMPORTED_MODULE_1__.classModule, snabbdom__WEBPACK_IMPORTED_MODULE_2__.propsModule, snabbdom__WEBPACK_IMPORTED_MODULE_3__.styleModule, snabbdom__WEBPACK_IMPORTED_MODULE_4__.eventListenersModule,]);
-
-const container = document.getElementById("container");
-
-const vnode = (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)("div#container", {},
-    (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)('ul', [], [
-        (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)('a', {}, 'a'),
-        (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)('b', {}, 'b'),
-        (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)('c', {}, 'c'),
-        (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)('d', {}, 'd')
-    ]));
-
-
-// Patch into empty DOM element – this modifies the DOM as a side effect
-patch(container, vnode);
-
-// 因为patch是基于vnode进行对比的，因此你直接操作dom的变化，vnode是感知不到的
-// 通过下述方式用来判断节点是否被复用
-const a = document.querySelector('a')
-a.style.backgroundColor = 'red'
-
-const b = document.querySelector('b')
-b.style.backgroundColor = 'green'
-
-const c = document.querySelector('c')
-c.style.backgroundColor = 'pink'
-
-const d = document.querySelector('d')
-d.style.backgroundColor = 'lightgray'
-
-//--------------------------------
-// const newVnode = h("div#container.two.classes", {},
-//     h('ul', [], [
-//         h('d', {}, 'd'),
-//         h('b', {}, 'b'),
-//         h('c', {}, 'c'),
-//         h('a', {}, 'a')
-//     ]));
-
-window.clickHandle = function () {
-    const newVnode = (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)("div#container", {},
-        (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)('ul', [], [
-            (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)('b', {}, 'b-1'),
-            (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)('d', {}, 'd-1'),
-            (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)('a', {}, 'a-1'),
-            (0,snabbdom__WEBPACK_IMPORTED_MODULE_5__.h)('c', {}, 'c-1')
-        ]));
-
-    // Second `patch` invocation
-    patch(vnode, newVnode); // Snabbdom efficiently updates the old view to the new state
+function flattenAndFilter(children, flattened) {
+    for (const child of children) {
+        // filter out falsey children, except 0 since zero can be a valid value e.g inside a chart
+        if (child !== undefined &&
+            child !== null &&
+            child !== false &&
+            child !== "") {
+            if (Array.isArray(child)) {
+                flattenAndFilter(child, flattened);
+            }
+            else if (typeof child === "string" ||
+                typeof child === "number" ||
+                typeof child === "boolean") {
+                flattened.push(vnode(undefined, undefined, undefined, String(child), undefined));
+            }
+            else {
+                flattened.push(child);
+            }
+        }
+    }
+    return flattened;
 }
+/**
+ * jsx/tsx compatible factory function
+ * see: https://www.typescriptlang.org/docs/handbook/jsx.html#factory-functions
+ */
+function jsx(tag, data, ...children) {
+    const flatChildren = flattenAndFilter(children, []);
+    if (typeof tag === "function") {
+        // tag is a function component
+        return tag(data, flatChildren);
+    }
+    else {
+        if (flatChildren.length === 1 &&
+            !flatChildren[0].sel &&
+            flatChildren[0].text) {
+            // only child is a simple text node, pass as text for a simpler vtree
+            return h(tag, data, flatChildren[0].text);
+        }
+        else {
+            return h(tag, data, flatChildren);
+        }
+    }
+}
+(function (jsx) {
+})(jsx || (jsx = {}));
 
-})();
-
-/******/ })()
-;
-//# sourceMappingURL=main.js.map
+exports.Fragment = Fragment;
+exports.array = array;
+exports.attachTo = attachTo;
+exports.attributesModule = attributesModule;
+exports.classModule = classModule;
+exports.datasetModule = datasetModule;
+exports.eventListenersModule = eventListenersModule;
+exports.fragment = fragment;
+exports.h = h;
+exports.htmlDomApi = htmlDomApi;
+exports.init = init$1;
+exports.jsx = jsx;
+exports.primitive = primitive;
+exports.propsModule = propsModule;
+exports.styleModule = styleModule;
+exports.thunk = thunk;
+exports.toVNode = toVNode;
+exports.vnode = vnode;
