@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-02-01T13:38:39.538Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="UJdY35ox1jXoHRpXyIxt" version="20.8.13" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-01T13:41:24.028Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="ymj1C-xob8Fx3kBeXLl6" version="20.8.13" type="github">
   <diagram id="CYfjbphqx9tA-r45BFys" name="第 1 页">
-    <mxGraphModel dx="8343" dy="3058" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="7699" dy="2699" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -535,8 +535,8 @@
         <mxCell id="Tw7vDCOJv9hkWKka9X_p-108" value="vnode.data.hook.prepatch&lt;br&gt;（组件，来自compoentvnodehooks)" style="rounded=0;whiteSpace=wrap;html=1;fontSize=15;" vertex="1" parent="1">
           <mxGeometry x="-3412.5" y="2810" width="355" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="Tw7vDCOJv9hkWKka9X_p-109" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;br&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=15;" vertex="1" parent="1">
-          <mxGeometry x="-4480" y="2755" width="848" height="305" as="geometry" />
+        <mxCell id="Tw7vDCOJv9hkWKka9X_p-109" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;br&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=15;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="-4530" y="2755" width="900" height="505" as="geometry" />
         </mxCell>
         <mxCell id="Tw7vDCOJv9hkWKka9X_p-111" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;span style=&quot;color:#9b3a63;font-weight:bold;&quot;&gt;prepatch -&amp;gt; &lt;/span&gt;updateChildComponent&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;fontSize=15;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
           <mxGeometry x="-3960" y="2755" width="328" height="70" as="geometry" />
@@ -566,11 +566,14 @@
         <mxCell id="Tw7vDCOJv9hkWKka9X_p-117" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;pre style=&quot;font-family: &amp;quot;Fira Code&amp;quot;, monospace; font-size: 11.3pt;&quot;&gt;已经挂载过的：queueActivatedComponent&lt;br/&gt;初次挂载：activateChildComponent&lt;/pre&gt;&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;fontSize=15;" vertex="1" parent="1">
           <mxGeometry x="-1880" y="2860" width="520" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="Tw7vDCOJv9hkWKka9X_p-120" value="根据oldCh和ch得情况： updateChildren || addVnodes || removeVnodes || vnode.text处理" style="rounded=0;whiteSpace=wrap;html=1;fontSize=15;" vertex="1" parent="1">
+        <mxCell id="Tw7vDCOJv9hkWKka9X_p-120" value="根据oldCh和ch得情况： &lt;b&gt;&lt;font color=&quot;#3333ff&quot;&gt;updateChildren&lt;/font&gt;&lt;/b&gt; || addVnodes || removeVnodes || vnode.text处理" style="rounded=0;whiteSpace=wrap;html=1;fontSize=15;" vertex="1" parent="1">
           <mxGeometry x="-3410" y="2922" width="360" height="168" as="geometry" />
         </mxCell>
         <mxCell id="Tw7vDCOJv9hkWKka9X_p-121" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;span style=&quot;color:#9b3a63;font-weight:bold;&quot;&gt;vnode.data.hook.postpatch&lt;br/&gt;(注意：directives 用到了这个 )&lt;/span&gt;&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;fontSize=15;" vertex="1" parent="1">
           <mxGeometry x="-3350" y="3117" width="260" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="Tw7vDCOJv9hkWKka9X_p-122" value="关键：组件属性更新" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=15;fontColor=#3333FF;" vertex="1" parent="1">
+          <mxGeometry x="-4530" y="2755" width="150" height="55" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
