@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-02-01T11:21:20.721Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="bEXwd5D43iWKXnnLaHVu" version="20.8.13" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-01T11:23:30.328Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="Vunraj0UhoJMIMCmFyTk" version="20.8.13" type="github">
   <diagram id="CYfjbphqx9tA-r45BFys" name="第 1 页">
-    <mxGraphModel dx="3723" dy="1965" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="6182" dy="2775" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -267,7 +267,12 @@
           <mxGeometry x="-2330" y="1550" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qLNd9muEBpBftxDDXbBB-38" target="qLNd9muEBpBftxDDXbBB-55">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-1310" y="1580" />
+              <mxPoint x="-1310" y="2515" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-38" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;pre style=&quot;font-family: &amp;quot;Fira Code&amp;quot;, monospace; font-size: 11.3pt;&quot;&gt;createElm(&lt;span style=&quot;color:#f76c5e;&quot;&gt;vnode&lt;/span&gt;, insertedVnodeQueue)&lt;/pre&gt;&lt;/pre&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-1905" y="1545" width="330" height="70" as="geometry" />
@@ -285,46 +290,52 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-40" value="oldVnode不是DOM" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-2210" y="1820" width="140" height="60" as="geometry" />
+          <mxGeometry x="-2460" y="1790" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="qLNd9muEBpBftxDDXbBB-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qLNd9muEBpBftxDDXbBB-42" target="qLNd9muEBpBftxDDXbBB-55">
+        <mxCell id="qLNd9muEBpBftxDDXbBB-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=none;" edge="1" parent="1" source="qLNd9muEBpBftxDDXbBB-44" target="qLNd9muEBpBftxDDXbBB-55">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-42" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;pre style=&quot;font-family: &amp;quot;Fira Code&amp;quot;, monospace; font-size: 11.3pt;&quot;&gt;patchVnode(&lt;span style=&quot;color:#f76c5e;&quot;&gt;oldVnode&lt;/span&gt;, &lt;span style=&quot;color:#f76c5e;&quot;&gt;vnode&lt;/span&gt;, insertedVnodeQueue, ...&lt;/pre&gt;&lt;/pre&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-1830" y="1860" width="500" height="85" as="geometry" />
+          <mxGeometry x="-2710" y="1970" width="500" height="85" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qLNd9muEBpBftxDDXbBB-43" target="qLNd9muEBpBftxDDXbBB-44">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-43" value="oldVnode是DOM" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="-2160" y="1615" width="140" height="60" as="geometry" />
+          <mxGeometry x="-2230" y="1790" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qLNd9muEBpBftxDDXbBB-44" target="qLNd9muEBpBftxDDXbBB-51">
           <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="qLNd9muEBpBftxDDXbBB-44" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;span style=&quot;color:#9b3a63;font-weight:bold;&quot;&gt;createElm&lt;/span&gt;(&lt;br&gt;  &lt;span style=&quot;color:#f76c5e;&quot;&gt;vnode&lt;/span&gt;,&lt;br&gt;  insertedVnodeQueue,&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-1874" y="1620" width="220" height="110" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qLNd9muEBpBftxDDXbBB-51" target="qLNd9muEBpBftxDDXbBB-53">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-51" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;span style=&quot;color:#beb7a2;font-style:italic;&quot;&gt;// update parent placeholder node element, recursively&lt;/span&gt;&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-1710" y="1770" width="520" height="70" as="geometry" />
+          <mxGeometry x="-2250" y="2200" width="520" height="70" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="qLNd9muEBpBftxDDXbBB-53" target="qLNd9muEBpBftxDDXbBB-55">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-53" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;span style=&quot;color:#beb7a2;font-style:italic;&quot;&gt;// destroy old node&lt;/span&gt;&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-1080" y="1770" width="210" height="70" as="geometry" />
+          <mxGeometry x="-2100" y="2350" width="210" height="70" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-55" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;span style=&quot;color:#9b3a63;font-weight:bold;&quot;&gt;invokeInsertHook&lt;/span&gt;&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-850" y="1610" width="180" height="70" as="geometry" />
+          <mxGeometry x="-2470" y="2480" width="180" height="70" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-62" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;span style=&quot;color:#9b3a63;font-weight:bold;&quot;&gt;removeVnodes&lt;/span&gt;&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-1160" y="1810" width="140" height="70" as="geometry" />
+          <mxGeometry x="-2180" y="2390" width="140" height="70" as="geometry" />
         </mxCell>
         <mxCell id="qLNd9muEBpBftxDDXbBB-63" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;span style=&quot;color:#9b3a63;font-weight:bold;&quot;&gt;invokeDestroyHook&lt;/span&gt;&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-1000" y="1800" width="190" height="70" as="geometry" />
+          <mxGeometry x="-2020" y="2380" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="qLNd9muEBpBftxDDXbBB-64" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;" edge="1" parent="1" source="qLNd9muEBpBftxDDXbBB-42" target="qLNd9muEBpBftxDDXbBB-44">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-2210" y="2012.5" as="sourcePoint" />
+            <mxPoint x="-760" y="1615" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qLNd9muEBpBftxDDXbBB-44" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;span style=&quot;color:#9b3a63;font-weight:bold;&quot;&gt;createElm&lt;/span&gt;(&lt;br&gt;  &lt;span style=&quot;color:#f76c5e;&quot;&gt;vnode&lt;/span&gt;,&lt;br&gt;  insertedVnodeQueue,&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-2100" y="1957.5" width="220" height="110" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
