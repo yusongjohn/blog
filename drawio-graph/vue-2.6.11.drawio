@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-02-05T05:11:27.040Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="GiGT-l2859Duxv_GR6bg" version="20.8.16" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-05T08:00:35.984Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="o9ULwMYbk2_uT7uh7U0K" version="20.8.16" type="github">
   <diagram id="CYfjbphqx9tA-r45BFys" name="第 1 页">
-    <mxGraphModel dx="11581" dy="5099" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="11167" dy="4834" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -8,7 +8,7 @@
           <mxGeometry x="-3262.5" y="-3201.82" width="540" height="308" as="geometry" />
         </mxCell>
         <mxCell id="4bwGVamTZCCQDD6INmVC-33" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;labelBackgroundColor=none;fontSize=20;fillColor=none;strokeWidth=1;strokeColor=#3333FF;" parent="1" vertex="1">
-          <mxGeometry x="-3692.5" y="-2773.82" width="490" height="350" as="geometry" />
+          <mxGeometry x="-3692.5" y="-2773.82" width="492.5" height="333.82" as="geometry" />
         </mxCell>
         <mxCell id="nyC_OaXjF2CT9D5yMoAg-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="nyC_OaXjF2CT9D5yMoAg-3" target="nyC_OaXjF2CT9D5yMoAg-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -439,7 +439,7 @@
         <mxCell id="Tw7vDCOJv9hkWKka9X_p-17" value="&lt;pre style=&quot;border-color: var(--border-color); font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-family: &amp;quot;Fira Code&amp;quot;, monospace; font-size: 20px;&quot;&gt;vnode.data.hook.init&lt;br style=&quot;font-size: 20px;&quot;&gt;&lt;pre style=&quot;font-family: &amp;quot;Fira Code&amp;quot;, monospace; font-size: 20px;&quot;&gt;（组件才会有）componentVNodeHooks.init&lt;/pre&gt;&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontColor=default;verticalAlign=middle;align=center;fontSize=20;" parent="1" vertex="1">
           <mxGeometry x="-3710" y="-3095.82" width="455" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="Tw7vDCOJv9hkWKka9X_p-27" value="&lt;pre style=&quot;font-family: &amp;quot;Fira Code&amp;quot;, monospace; font-size: 20px;&quot;&gt;componentVNodeHooks.prepatch&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontColor=default;strokeColor=none;fillColor=none;fontSize=20;" parent="1" vertex="1">
+        <mxCell id="Tw7vDCOJv9hkWKka9X_p-27" value="&lt;pre style=&quot;font-family: &amp;quot;Fira Code&amp;quot;, monospace; font-size: 20px;&quot;&gt;componentVNodeHooks.prepatch&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontColor=default;strokeColor=none;fillColor=none;fontSize=20;fontStyle=0" parent="1" vertex="1">
           <mxGeometry x="-3132.5" y="-3190.82" width="350" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Tw7vDCOJv9hkWKka9X_p-28" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=none;fontColor=default;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=20;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="Tw7vDCOJv9hkWKka9X_p-17" target="Tw7vDCOJv9hkWKka9X_p-27" edge="1">
@@ -453,7 +453,7 @@
         <mxCell id="4bwGVamTZCCQDD6INmVC-19" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=none;fontSize=20;fontColor=default;" parent="1" source="Tw7vDCOJv9hkWKka9X_p-40" target="Tw7vDCOJv9hkWKka9X_p-41" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Tw7vDCOJv9hkWKka9X_p-40" value="&lt;pre style=&quot;border-color: var(--border-color); text-align: left; color: rgb(47, 63, 80); font-size: 20px; font-family: &amp;quot;Fira Code&amp;quot;, monospace;&quot;&gt;1. createComponentInstanceForVnode&lt;br style=&quot;font-size: 20px;&quot;&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;container=0;fillColor=none;strokeColor=none;labelBackgroundColor=none;fontSize=20;" parent="1" vertex="1">
+        <mxCell id="Tw7vDCOJv9hkWKka9X_p-40" value="&lt;pre style=&quot;border-color: var(--border-color); text-align: left; font-size: 20px; font-family: &amp;quot;Fira Code&amp;quot;, monospace;&quot;&gt;1. createComponentInstanceForVnode&lt;br style=&quot;font-size: 20px;&quot;&gt;&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;container=0;fillColor=none;strokeColor=none;labelBackgroundColor=none;fontSize=20;fontStyle=0;fontColor=default;" parent="1" vertex="1">
           <mxGeometry x="-3162.5" y="-3028.82" width="428" height="60" as="geometry" />
         </mxCell>
         <mxCell id="Tw7vDCOJv9hkWKka9X_p-41" value="&lt;pre style=&quot;border-color: var(--border-color); text-align: left; font-family: &amp;quot;Fira Code&amp;quot;, monospace; font-size: 20px;&quot;&gt;2. child.$mount&lt;/pre&gt;" style="rounded=0;whiteSpace=wrap;html=1;container=0;fillColor=none;strokeColor=none;labelBackgroundColor=none;fontColor=default;fontSize=20;" parent="1" vertex="1">
