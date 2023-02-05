@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-02-05T08:05:42.861Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="zaIeTHTJhCSKtsnFx7-7" version="20.8.16" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-05T08:07:06.162Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="BcI6SEYS4zGFghaPeUFM" version="20.8.16" type="github">
   <diagram id="CYfjbphqx9tA-r45BFys" name="第 1 页">
-    <mxGraphModel dx="10339" dy="4303" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="11857" dy="5276" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -210,7 +210,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="A5yrZgPphUj7bXW_ytzl-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=20;fontColor=default;curved=1;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=5;" edge="1" parent="1" source="qLNd9muEBpBftxDDXbBB-38" target="Tw7vDCOJv9hkWKka9X_p-12">
+        <mxCell id="A5yrZgPphUj7bXW_ytzl-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=20;fontColor=default;curved=1;fontStyle=1;fillColor=#dae8fc;strokeColor=default;strokeWidth=5;dashed=1;" edge="1" parent="1" source="qLNd9muEBpBftxDDXbBB-38" target="Tw7vDCOJv9hkWKka9X_p-12">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="-5200" y="-2750" />
@@ -377,8 +377,12 @@
         <mxCell id="Tw7vDCOJv9hkWKka9X_p-174" value="&lt;pre style=&quot;&quot;&gt;&lt;font face=&quot;Fira Code, monospace&quot;&gt;&lt;b&gt;removeAndInvokeRemoveHook&lt;br/&gt;&lt;/b&gt;&lt;span style=&quot;font-size: 15.0667px;&quot;&gt;（触发组件remove相关钩子、删除组件）&lt;/span&gt;&lt;/font&gt;&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;labelBackgroundColor=none;fontColor=default;align=center;verticalAlign=middle;rounded=1;" parent="1" vertex="1">
           <mxGeometry x="-5893" y="-2483.21" width="290" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="A5yrZgPphUj7bXW_ytzl-20" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;strokeWidth=5;fontSize=20;fontColor=default;fillColor=#f8cecc;strokeColor=#b85450;" edge="1" parent="1" source="Tw7vDCOJv9hkWKka9X_p-12" target="A5yrZgPphUj7bXW_ytzl-18">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="A5yrZgPphUj7bXW_ytzl-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;strokeWidth=5;fontSize=20;fontColor=default;fillColor=#f8cecc;strokeColor=#b85450;curved=1;dashed=1;" edge="1" parent="1" source="Tw7vDCOJv9hkWKka9X_p-12" target="A5yrZgPphUj7bXW_ytzl-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-3721" y="-3380" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="Tw7vDCOJv9hkWKka9X_p-12" value="&lt;pre style=&quot;border-color: var(--border-color); text-align: left; font-family: &amp;quot;Fira Code&amp;quot;, monospace; font-size: 20px;&quot;&gt;createComponent(...)&lt;/pre&gt;" style="rhombus;whiteSpace=wrap;html=1;labelBackgroundColor=none;fontSize=20;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="-4521" y="-3400" width="262" height="124.33" as="geometry" />
