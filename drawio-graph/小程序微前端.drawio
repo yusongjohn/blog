@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-02-06T07:56:37.465Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="iMRQY4BHd-Kn18xqm9ac" version="20.8.16" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-06T08:31:54.009Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="rsnVrMBCtQILZdmyPPo4" version="20.8.16" type="github">
   <diagram name="第 1 页" id="pwnamHfonwFMPaj2_7e_">
     <mxGraphModel dx="2069" dy="796" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -43,6 +43,9 @@
         <mxCell id="CD8uOtf8aZ3cqjtiaQSz-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=21;" edge="1" parent="1" source="CD8uOtf8aZ3cqjtiaQSz-9" target="CD8uOtf8aZ3cqjtiaQSz-23">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="CD8uOtf8aZ3cqjtiaQSz-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=21;" edge="1" parent="1" source="CD8uOtf8aZ3cqjtiaQSz-9" target="CD8uOtf8aZ3cqjtiaQSz-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="CD8uOtf8aZ3cqjtiaQSz-9" value="普通分包" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="265" y="670" width="120" height="60" as="geometry" />
         </mxCell>
@@ -50,7 +53,7 @@
           <mxGeometry x="440" y="590" width="290" height="40" as="geometry" />
         </mxCell>
         <mxCell id="CD8uOtf8aZ3cqjtiaQSz-15" value="多个小程序的融合" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=21;" vertex="1" parent="1">
-          <mxGeometry x="-170" y="340" width="310" height="70" as="geometry" />
+          <mxGeometry x="-170" y="320" width="310" height="70" as="geometry" />
         </mxCell>
         <mxCell id="CD8uOtf8aZ3cqjtiaQSz-16" value="app.wxss：受到app.wxss的影响" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="440" y="660" width="290" height="40" as="geometry" />
@@ -61,7 +64,7 @@
         <mxCell id="CD8uOtf8aZ3cqjtiaQSz-20" value="存储，各应用间的存储应该是隔离的" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="440" y="820" width="290" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="CD8uOtf8aZ3cqjtiaQSz-23" value="当前应用app.json中的有效属性：window、plugins（全局和分包）、useExtendLib" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="CD8uOtf8aZ3cqjtiaQSz-23" value="app.json：当前应用中的有效属性：window、plugins（全局和分包）、useExtendLib、preloadRule等，全局组件：usingComponents" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="440" y="900" width="290" height="40" as="geometry" />
         </mxCell>
         <mxCell id="CD8uOtf8aZ3cqjtiaQSz-25" value="js沙箱：getApp、App、global等" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
