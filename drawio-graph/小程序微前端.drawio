@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-02-06T04:46:29.444Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="gWMXeY9k-UAS_lIBs3lv" version="20.8.16" type="github">
+<mxfile host="app.diagrams.net" modified="2023-02-06T07:47:00.998Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="uEsS6ENh3nT_Tjxl4GGT" version="20.8.16" type="github">
   <diagram name="第 1 页" id="pwnamHfonwFMPaj2_7e_">
-    <mxGraphModel dx="2074" dy="1156" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1242" dy="796" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -12,6 +12,24 @@
         </mxCell>
         <mxCell id="CD8uOtf8aZ3cqjtiaQSz-5" value="&lt;pre style=&quot;background-color:#fdf6e3;color:#2f3f50;font-family:&#39;Fira Code&#39;,monospace;font-size:11.3pt;&quot;&gt;&lt;span style=&quot;color:#9b3a63;font-weight:bold;&quot;&gt;addRuntimeGuru&lt;/span&gt;&lt;/pre&gt;" style="text;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="180" y="420" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="CD8uOtf8aZ3cqjtiaQSz-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CD8uOtf8aZ3cqjtiaQSz-6" target="CD8uOtf8aZ3cqjtiaQSz-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CD8uOtf8aZ3cqjtiaQSz-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="CD8uOtf8aZ3cqjtiaQSz-6" target="CD8uOtf8aZ3cqjtiaQSz-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CD8uOtf8aZ3cqjtiaQSz-6" value="编译阶段" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="615" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CD8uOtf8aZ3cqjtiaQSz-7" value="运行阶段" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CD8uOtf8aZ3cqjtiaQSz-8" value="主包" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="265" y="555" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="CD8uOtf8aZ3cqjtiaQSz-9" value="普通分包" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="265" y="670" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
