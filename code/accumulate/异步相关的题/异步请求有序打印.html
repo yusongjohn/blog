@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <script>
+        // 请求1，2，3，要求并发然后有返回就立刻打印，但是打印的顺序也要满足1，2，3
+
+        function logByOrder(promises) {
+            const cache = [];
+            let nextIndex = 0;
+
+            promises.forEach((promise, index) => {
+                promise.then((value) => {
+                    if (nextIndex === index) {
+                        console.log(value);
+                        nextIndex++;
+                        checkAfterLogStatsu();
+                    } else {
+                        cache[index] = value
+                    }
+                })
+            })
+
+            function checkAfterLogStatsu() {
+                let i = nextIndex
+                for (; i < promises.length; i++) {
+                    if (cache[i]) {
+                        console.log(cache[i])
+                        continue;
+                    }
+                    break
+                }
+                nextIndex = i;
+            }
+        }
+
+        /// 测试 --------------------------
+        
+        const buildPromise = (i) => new Promise(resovle => setTimeout(() => resovle(i), Math.random() * 5 * 1000))
+
+        const promises = [];
+        for (let i = 0; i < 10; i++) {
+            promises.push(buildPromise(i));
+        }
+
+        logByOrder(promises)
+    </script>
+</head>
+
+<body>
+
+
+</body>
+
+</html>

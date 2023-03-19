@@ -1,0 +1,15 @@
+// 第三题 请求A，请求B，请求C，有50%概率reject，也有50%概率返回一个数字。现在并发，并且求和。如果resolve了就正常求和，如果reject就加0
+
+const promises = [];
+
+Promise.allSettled(promises).then(result => {
+    const sum = 0;
+    result.forEach(item => {
+        if (item.status === 'fulfilled') {
+            sum += item.value;
+        } else if (item.status === "rejected") {
+            sum += 0;
+        }
+    })
+    return result;
+})

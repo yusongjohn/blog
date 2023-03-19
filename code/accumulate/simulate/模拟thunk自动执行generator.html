@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<script src="myPromise.js"></script>-->
+    <script src="../../pageBuild/lib/SlickGrid-2.3.16/lib/jquery-1.8.3.js"></script>
+</head>
+<body>
+<a id='a' href="a.png" download="">aaa</a>
+
+
+<script>
+    function* gen() {
+        var p1 = new Promise(function (resolve) {
+            $.ajax(
+                {
+                    url: "https://api.github.com/users/github",
+                    success: function (data) {
+                        console.log('1111')
+                        resolve(data);
+                    }
+                }
+            )
+        });
+        var p2 = new Promise(function (resolve) {
+            $.ajax(
+                {
+                    url: "https://api.github.com/users/github",
+                    success: function (data) {
+                        console.log('2222')
+                        resolve(data);
+                    }
+                }
+            )
+        });
+
+        var p3 = new Promise(function (resolve) {
+            $.ajax(
+                {
+                    url: "https://api.github.com/users/github",
+                    success: function (data) {
+                        console.log('3333')
+                        resolve(data);
+                    }
+                }
+            )
+        });
+        var f1 = yield p1;
+
+        var f2 = yield p2;
+
+        var f3 = yield  p3;
+
+        console.log(f1, f2, f3, '---');
+    }
+
+
+    function run(gen) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        var it = gen.apply(this, args);// 在当前上下文初始化生成迭代器
+
+        function handleNext(value) {
+            // 第一次运行也是从这里喀什，但是第一次的传值会被忽略
+            // 两种情况
+            //同步：返回一个常量
+            //异步：返回的next.value是promise/thenable对象
+            var next = it.next(value);
+            return handleResult(next)
+        }
+
+        function handlerError(err) {
+            return Promise.resolve(it.throw(err)).then(handleResult)
+        }
+
+        function handleResult(next) {
+            if (next.done) {
+                return next.value;
+            } else {
+                //主要是为了异步结果准备的，不过使用Promise.resolve也兼容了同步结果
+                return Promise.resolve(next.value).then(handleNext, handlerError)
+            }
+        }
+
+        return Promise.resolve().then(handleNext)
+    }
+
+    run(gen)
+
+</script>
+</body>
+</html>

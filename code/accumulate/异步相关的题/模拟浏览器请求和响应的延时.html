@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 模拟请求的发送与接收过程，在有延时的情况下，获取时间戳
+    // 要求：发送和接收的延时控制在 300ms ~ 1000ms
+
+    function random(){
+        let random = Math.random() * 700 + 300;
+        return random;
+    }
+
+    function getTimestamp(){
+        // 请求延时
+        return new Promise(function(resolve){
+            setTimeout(function(){
+
+                // 响应延时
+                let response = new Promise(function(resolve){
+                    let time = Date.now() + '';
+
+                    setTimeout(function(){
+                        resolve(time);
+                    }, random())
+                });
+
+                resolve(response);
+
+            }, random())
+        })
+    }
+
+    // 只返回比上次的调用时间更新的结果，旧结果被统一置为 null
+    function sequence(fn){
+        let lastTime = 0;
+
+        return () => {
+            return new Promise(async function(resolve){
+                let currentTime = await fn();
+                if (parseInt(currentTime) < lastTime) {
+                    currentTime = null;
+                } else {
+                    lastTime = currentTime;
+                }
+                resolve(currentTime);
+            })
+        }
+    }
+
+
+    // getTimestamp().then(data => {console.log(data);});
+    // getTimestamp().then(data => {console.log(data);});
+    // getTimestamp().then(data => {console.log(data);});
+    // getTimestamp().then(data => {console.log(data);});
+    // getTimestamp().then(data => {console.log(data);});
+    // getTimestamp().then(data => {console.log(data);});
+
+    var seq = sequence(getTimestamp);
+    seq().then(data => {
+        console.log(data);
+    });
+    seq().then(data => {
+        console.log(data);
+    });
+    seq().then(data => {
+        console.log(data);
+    });
+    seq().then(data => {
+        console.log(data);
+    });
+    seq().then(data => {
+        console.log(data);
+    });
+    seq().then(data => {
+        console.log(data);
+    });
+</script>
+</body>
+</html>
